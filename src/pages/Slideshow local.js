@@ -18,7 +18,7 @@ function Slideshow() {
   const [slideshow, setSlideshow] = useState(location.state.slide)
   const [index, setIndex] = useState(art.i)
   const [pictures, setPictures] = useState([])
-
+console.log(pictures)
   useEffect(() => {
 
     axios.get(`/pictures/${art.img.board}`).then((response) => {
@@ -38,28 +38,29 @@ function Slideshow() {
   const action = (action) => {
    
    if(action === "next") {
-    if(art.i>=pictures.length - 1) {
+
+    if(art.i>=gallery.length - 1) {
   
-      setArt({img:pictures[0], i:0})
+      setArt({img:gallery[0], i:0})
       setProgress(0)
     }
     else  {
-      setArt({img:pictures[art.i+1], i:art.i+1})
+      setArt({img:gallery[art.i+1], i:art.i+1})
 
-      setProgress(Math.round(((art.i+1) / (pictures.length)) * 100))
+      setProgress(Math.round(((art.i+1) / (gallery.length)) * 100))
     }
    
  
    } 
    if(action=== "previous") {
     if(art.i<=0) {
-      setArt({img:pictures[pictures.length-1], i:pictures.length-1})
+      setArt({img:gallery[gallery.length-1], i:gallery.length-1})
       setProgress(100 - 7)
     }
     else  {
       
-      setArt({img:pictures[art.i-1], i:art.i-1})
-      setProgress(Math.round(((art.i-1) / (pictures.length)) * 100))
+      setArt({img:gallery[art.i-1], i:art.i-1})
+      setProgress(Math.round(((art.i-1) / (gallery.length)) * 100))
     }
    }
   }
@@ -71,8 +72,7 @@ function Slideshow() {
     let myInterval
   let index
   if(Math.round(progress) % 6 === 0) {
-    index = (Math.floor(progress) * pictures.length)/ 100
-    console.log(index)
+    index = (Math.floor(progress) * gallery.length)/ 100
     setIndex(Math.floor(index))
   } 
     myInterval = setInterval(() => {

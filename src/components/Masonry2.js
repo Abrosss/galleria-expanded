@@ -26,6 +26,7 @@ function Masonry(props) {
 }
   const navigate = useNavigate();
   const viewImage = (img, i, e) => {
+    console.log(i)
     if(!e.target.dataset.id) {
       navigate('/slideshow',{state: {
         art:{img, i},

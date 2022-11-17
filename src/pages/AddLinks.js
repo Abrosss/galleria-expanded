@@ -66,8 +66,7 @@ let img = pictures[0]
     if(thumbnails.length <= 4) {
      
 
-      axios.put(`/boards/${location.state.id}`,{
-        name: boardName.current.textContent,
+      axios.put(`/boards/thumbnails/${location.state.id}`,{
         thumbnails: thumbnails
      }).then(res => {
       if(res.status === 200) {
@@ -128,6 +127,7 @@ let img = pictures[0]
   const handleKeyPress = (event, text) => {
     if(event.key === 'Enter'){
       event.currentTarget.setAttribute("contenteditable", false)
+      console.log(boardName.current.textContent)
       axios.put(`/boards/${location.state.id}`,{
             name: boardName.current.textContent,
            
@@ -163,7 +163,7 @@ let img = pictures[0]
         <a onClick={() => viewImage(0)} href='/slideshow'>START SLIDESHOW</a>
         </header>
         <section className='board-pins'>
-        <h2 ref={boardName} contentEditable autoComplete onKeyPress={(e) => handleKeyPress(e, e.currentTarget.textContent)} >{board.name}</h2>
+        <h2 autoCorrect='off' ref={boardName} contentEditable autoComplete onKeyPress={(e) => handleKeyPress(e, e.currentTarget.textContent)} >{board.name}</h2>
         <Masonry imageUrls={pictures} columnCount="4"/>
         <button onClick={ () => setLinksPopup(true)} className='addButton'><img src={plus}></img></button>
         </section>
