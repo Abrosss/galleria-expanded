@@ -15,17 +15,21 @@ function Home() {
 
   // if(location.state.board.board) boardset = location.state.board.board
   // if(location.state.board.newData2) boardset = location.state.board.newData2[0]
-console.log(location.state.id)
+
   const [board, setBoard] = useState([])
   const [pictures, setPictures] = useState([])
   const [updatePictures, setUpdatePictures] = useState(false)
   const [linksPopup, setLinksPopup] = useState(false)
   const [inputList, setInputList] = useState([{ link: ""}]);
+  const [thumbnails, setThumbnails] = useState([])
   const navigate = useNavigate();
-  const viewImage = (i) => {
-    console.log(pictures)
 
-console.log(pictures)
+ console.log(thumbnails)
+
+  const viewImage = (i) => {
+
+
+
     // navigate('/slideshow',{state: {
     //   art:{img, i},
     //   slide: true
@@ -45,18 +49,37 @@ console.log(pictures)
   useEffect(() => {
 
     axios.get(`/pictures/${location.state.id}`).then((response) => {
-     console.log(response.data)
+    
       setPictures(response.data);
     });
   }, [updatePictures]);
   useEffect(() => {
 
     axios.get(`/boards/${location.state.id}`).then((response) => {
-     console.log(response.data)
+   
       setBoard(response.data[0]);
     });
   }, []);
- console.log(board) 
+
+  useEffect(() => {
+
+    if(thumbnails.length <= 4) {
+     
+
+      axios.put(`/boards/${location.state.id}`,{
+        name: boardName.current.textContent,
+        thumbnails: thumbnails
+     }).then(res => {
+      if(res.status === 200) {
+        setInputList([{}])
+      }
+     }) 
+     .catch(err=>console.log(err))
+    }
+    else return
+    
+  }, [thumbnails])
+
   const closeImage = (e) => {
     if(e.target.className==="overlay") {
       if(linksPopup) setLinksPopup(false)
@@ -75,12 +98,12 @@ console.log(pictures)
     
     const list = [...inputList];
     list[index][name] = value;
-    console.log(inputList)
+  
     
   };
 
    function addPictures(e) {
-    console.log(inputList)
+
     e.preventDefault()
     axios.post('/addPicture', {
       links:inputList,
@@ -88,16 +111,14 @@ console.log(pictures)
      }).then(res =>{
       if(res.status===200) {
         setLinksPopup(false)
-        setInputList([{}])
+        setThumbnails(thumbnails => [...thumbnails, ...inputList] );
         setUpdatePictures(res.data)
         setTimeout(() => {
           setUpdatePictures(false)
         }, 100);
         // setPictures([...pictures, ...inputList.link]);
       }
-      setTimeout(() => {
-        setInputList([{}])
-      }, 100);
+   
      })
      .catch(err=>console.log(err))
   }
@@ -114,7 +135,7 @@ console.log(pictures)
       setTimeout(() => {
         boardName.current.setAttribute("contenteditable", true)
       }, 0);
-      console.log(text)
+  
     }
   }
   return (

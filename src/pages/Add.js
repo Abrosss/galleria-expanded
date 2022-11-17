@@ -167,10 +167,10 @@ const OnCheckboxClick= (e) => {
         
             } })}   className='card'>
               <div className='thumbnails'>
-              {/* <img src={board.links[0] && board.links[0].link}></img>
-              <img src={board.links[1] && board.links[1].link}></img>
-              <img src={board.links[2] && board.links[2].link}></img>
-              <img src={board.links[3] && board.links[3].link}></img> */}
+              <img src={board.thumbnails[0] && board.thumbnails[0].link}></img>
+              <img src={board.thumbnails[1] && board.thumbnails[1].link}></img>
+              <img src={board.thumbnails[2] && board.thumbnails[2].link}></img>
+              <img src={board.thumbnails[3] && board.thumbnails[3].link}></img>
               </div>
             </section>
             <span>{board.name}</span>

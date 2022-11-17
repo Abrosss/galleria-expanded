@@ -10,7 +10,7 @@ function Masonry(props) {
   useEffect(() => {
     setPics(props.imageUrls);
 }, [props.imageUrls])
-console.log(pics.filter(pic => console.log(pic)))
+
   async function deleteBoard(id) {
 
     try {
