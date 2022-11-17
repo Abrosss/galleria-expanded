@@ -28,14 +28,14 @@ function Home() {
 
   const viewImage = (i) => {
 
+let img = pictures[0]
 
+    navigate('/slideshow',{state: {
+      art:{img, i},
+      slide: true
 
-    // navigate('/slideshow',{state: {
-    //   art:{img, i},
-    //   slide: true
-
-    // }
-    //   });
+    }
+      });
 
   }
   // useEffect(() => {

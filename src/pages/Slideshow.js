@@ -11,7 +11,7 @@ function Slideshow() {
   const location = useLocation();
  
   const [art, setArt] = useState(location.state.art)
-
+console.log(art)
   const [progress, setProgress] = useState(Math.round((art.i / (gallery.length - 1)) * 100))
   const [data, setData] = useState({img: "", i: 0})
   const [slideshow, setSlideshow] = useState(location.state.slide)
@@ -107,7 +107,7 @@ function Slideshow() {
     <section className='slideshow-container'>
       <section className='image-container'>
       <div className="image-container__image">
-      <img src={art.img.link} alt="art"   ></img>
+      <img src={art.img.image} alt="art"   ></img>
       {/* <div onClick={() => viewImage(art.img, art.i)} className='view-image'>
         <div><img src={view} alt="art"></img></div>
         <span>VIEW IMAGE</span>
