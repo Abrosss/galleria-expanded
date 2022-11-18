@@ -12,12 +12,12 @@ function Slideshow() {
   const location = useLocation();
  
   const [art, setArt] = useState(location.state.art)
-
+console.log(art)
   const [progress, setProgress] = useState(Math.round((art.i / (gallery.length - 1)) * 100))
   const [data, setData] = useState({img: "", i: 0})
   const [slideshow, setSlideshow] = useState(location.state.slide)
   const [index, setIndex] = useState(art.i)
-  const [pictures, setPictures] = useState([])
+  const [pictures, setPictures] = useState(location.state.pictures)
 
   useEffect(() => {
 
@@ -67,30 +67,44 @@ function Slideshow() {
   // useEffect(() => {
   //   setArt({img:gallery[index], i:index})
   // }, [index])
+  var timeleft = 0;
   useEffect(() => {
-    let myInterval
-  let index
-  if(Math.round(progress) % 6 === 0) {
-    index = (Math.floor(progress) * pictures.length)/ 100
-    console.log(index)
-    setIndex(Math.floor(index))
-  } 
-    myInterval = setInterval(() => {
-      if (slideshow) {
-        setProgress(progress + .1)
-      } 
-      if(Math.round(progress) === 101) {
-       
-          setProgress(0)
-        
-        
-      }
-      
-    }, 100)
+   
+ 
+    let  myInterval = setInterval(() => slider(4),1000);
     return () => {
       clearInterval(myInterval)
     }
-  },[progress, slideshow])
+  },[slideshow, art])
+
+function slider(secondsPerSlide) {
+let total = secondsPerSlide * pictures.length
+let second = 100/total
+console.log(total)
+  
+    if (slideshow) {
+      console.log(timeleft++)
+      setProgress(prev => prev + second)
+    } 
+    
+    if(timeleft> 0 && timeleft % secondsPerSlide === 0) {
+     
+      setArt({img:pictures[art.i+1], i:art.i+1})
+      // setProgress(Math.round(((art.i+1) / (pictures.length)) * 100))
+      if(art.i == (pictures.length - 1)) {  setArt({img:pictures[0], i:0})
+      setProgress(0) } 
+    
+
+      
+        
+      
+    }
+  
+}
+
+
+
+  
   const slide = (e) => {
     e.preventDefault()
     setSlideshow(true)

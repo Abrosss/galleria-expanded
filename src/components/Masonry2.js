@@ -7,17 +7,35 @@ import { useState, useEffect } from 'react';
 function Masonry(props) {
   const [pics, setPics] = useState(props.imageUrls)
   const [hovered, setHovered] = useState(null)
+  const [thumbnails, setThumbnails] = useState([])
+  console.log(thumbnails)
   useEffect(() => {
     setPics(props.imageUrls);
 }, [props.imageUrls])
+console.log(props)
+useEffect(() => {
 
-  async function deleteBoard(id) {
+
+    axios.put(`/boards/thumbnails/${props.id}`,{
+      thumbnails: []
+   }).then(res => {
+    if(res.status === 200) {
+     console.log(res.data)
+    }
+   }) 
+   .catch(err=>console.log(err))
+  
+
+  
+}, [pics])
+  async function deleteBoard(id, board) {
 
     try {
       const updatedPics = pics.filter(pic => pic._id !== id);
       setPics(updatedPics)
+ 
       await axios.delete(`/pictures/${id}`);
-
+      
      
     } catch (err) {
       console.log(err);
@@ -45,7 +63,7 @@ function Masonry(props) {
       <div onMouseEnter={() => setHovered(i)} onMouseLeave={() => setHovered(null)} onClick={(e) => viewImage(img, i, e)} key={i} className="image">
          
         <div className='image-container'>
-        <div data-id={img._id} onClick={() => deleteBoard(img._id)} className={hovered === i ? 'trash show' : 'trash'}><img data-id={img._id}  src={trash}></img></div> 
+        <div data-id={img._id} onClick={() => deleteBoard(img._id, img.board)} className={hovered === i ? 'trash show' : 'trash'}><img data-id={img._id}  src={trash}></img></div> 
       <img className='img' src={img.image} alt="thumbnail"   ></img>
     
       </div>

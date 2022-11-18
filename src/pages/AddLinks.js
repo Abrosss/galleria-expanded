@@ -32,6 +32,7 @@ let img = pictures[0]
 
     navigate('/slideshow',{state: {
       art:{img, i},
+      pictures:pictures,
       slide: true
 
     }
@@ -164,7 +165,7 @@ let img = pictures[0]
         </header>
         <section className='board-pins'>
         <h2 autoCorrect='off' ref={boardName} contentEditable autoComplete onKeyPress={(e) => handleKeyPress(e, e.currentTarget.textContent)} >{board.name}</h2>
-        <Masonry imageUrls={pictures} columnCount="4"/>
+        <Masonry id={board._id} imageUrls={pictures} columnCount="4"/>
         <button onClick={ () => setLinksPopup(true)} className='addButton'><img src={plus}></img></button>
         </section>
        
