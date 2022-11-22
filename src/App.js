@@ -3,8 +3,8 @@ import './style.css';
 
 import Home from './pages/Home';
 import Slideshow from './pages/Slideshow';
-import Add from './pages/Add'
-import AddLinks from './pages/AddLinks'
+import Boards from './pages/Boards'
+import Gallery from './pages/Gallery'
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
 function App() {
   return (
@@ -13,8 +13,8 @@ function App() {
     <Router>
 
       <Routes>
-        <Route path="/profile/:id" element = {<AddLinks/>}/>
-        <Route path="/profile" element = {<Add/>}/>
+        <Route path="/profile/:id" element = {<Gallery/>}/>
+        <Route path="/profile" element = {<Boards/>}/>
         <Route path='/slideshow' element = {<Slideshow/>}/>
         <Route path='/' element = {<Home/>}/>
       </Routes>

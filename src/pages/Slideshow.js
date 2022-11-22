@@ -12,18 +12,25 @@ function Slideshow() {
   const location = useLocation();
  
   const [art, setArt] = useState(location.state.art)
-console.log(art)
   const [progress, setProgress] = useState(Math.round((art.i / (gallery.length - 1)) * 100))
   const [data, setData] = useState({img: "", i: 0})
   const [slideshow, setSlideshow] = useState(location.state.slide)
   const [index, setIndex] = useState(art.i)
   const [pictures, setPictures] = useState(location.state.pictures)
-
+  const [board, setBoard] = useState([])
+  console.log(art)
   useEffect(() => {
-
+    
     axios.get(`/pictures/${art.img.board}`).then((response) => {
     
       setPictures(response.data);
+    });
+  }, []);
+  useEffect(() => {
+  
+    axios.get(`/boards/${art.img.board}`).then((response) => {
+console.log(response.data[0])
+      setBoard(response.data[0]);
     });
   }, []);
   const viewImage = (img, i) => {
@@ -116,7 +123,7 @@ console.log(total)
     {data.img && 
       <section onClick={closeImage} className='overlay'>
         <section className='zoom-image'>
-          <img src={data.img.images.gallery} alt="art"></img>
+          <img src={data.img.image} alt="art"></img>
           <span onClick={closeImage} className='close'>CLOSE</span>
         </section>
       </section>
@@ -126,8 +133,43 @@ console.log(total)
         <a onClick={slide} href='/slideshow'>START SLIDESHOW</a>
     </header>
     <section className='slideshow' >
-      
-    <section className='slideshow-container'>
+      {board && board.art ?
+       <section className='slideshow-container '>
+       <section className='image-container'>
+       <div className="image-container__image">
+       <img src={art.img.image} alt="art"   ></img>
+       <div onClick={() => viewImage(art.img, art.i)} className='view-image'>
+         <div><img src={view} alt="art"></img></div>
+         <span>VIEW IMAGE</span>
+       </div>
+     
+     </div>
+     <div className='image-container__caption'>
+         <div className='text'>
+         <h2>{art.img.title && art.img.title}</h2>
+         <p>{art.img.artist && art.img.artist.name}</p>
+         </div>
+         {art.img.artist.image && 
+         <div className='artist'>
+         <img src={art.img.artist.image} alt="artist"></img>
+       </div>
+         }
+         
+       </div>
+     </section>
+     
+     <div className='description'>
+       <span className='year'>{art.img.year && art.img.year}</span>
+       <p>{art.img.description && art.img.description}</p>
+       {art.img.source && 
+       <div><a href={art.img.source} target="_blanc" className='button link'>GO TO SOURCE</a></div>
+       }
+       
+       
+     </div>
+     </section> 
+      :
+      <section className='slideshow-container center'>
       <section className='image-container'>
       <div className="image-container__image">
       <img src={art.img.image} alt="art"   ></img>
@@ -153,7 +195,22 @@ console.log(total)
       <div><a href={art.img.source} target="_blanc" className='button link'>GO TO SOURCE</a></div>
       
     </div> */}
-    </section>
+    </section>}
+  
+  {board.art ?
+   <section className='progress-container'>
+   <div class="progress">
+       <div style={{flexBasis: progress + "%"}} class="progress__filled"></div>
+      </div>
+     <section className='slide-name'>
+       <h4>{art.img.title}</h4>
+       <p>{art.img.artist.name}</p>
+     </section>
+     <section className='controls'>
+     <img className='button' onClick={() => action('previous')} src={back} alt="click previous"></img>
+     <img className='button' onClick={() => action('next')} src={next} alt="click next"></img>
+     </section>
+   </section> :
     <section className='progress-container'>
     <div class="progress">
         <div style={{flexBasis: progress + "%"}} class="progress__filled"></div>
@@ -167,6 +224,8 @@ console.log(total)
       <img className='button' onClick={() => action('next')} src={next} alt="click next"></img>
       </section>
     </section>
+  }
+  
     </section>
   </>
   )
