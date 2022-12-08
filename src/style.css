@@ -221,6 +221,7 @@ img {
   height: 80%;
   display: flex;
   flex-direction: column;
+  padding: 1rem;
 }
 
 .slideshow-container {
@@ -281,7 +282,7 @@ img {
 .progress-container {
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   padding: 1.5rem 3rem;
   position: relative;
