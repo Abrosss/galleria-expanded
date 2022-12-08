@@ -3,8 +3,8 @@ import logo from '../shared/logo.svg';
 import {Link, useNavigate} from 'react-router-dom'
 import { useState } from 'react';
 
-function Header() {
-  
+function Header({page}) {
+  console.log(page)
   const [boards, setBoards] = useState(JSON.parse(localStorage.getItem('board')))
   
   
@@ -24,7 +24,7 @@ console.log(img)
   return (
     <header>
         <Link to ='/profile'><img src={logo} alt="logo"></img></Link>
-        <a onClick={() => viewImage(0)} href='/slideshow'>START SLIDESHOW</a>
+       {page !== 'boards' && <a onClick={() => viewImage(0)} href='/slideshow'>START SLIDESHOW</a>} 
     </header>
   )
 }

@@ -18,14 +18,24 @@ function Slideshow() {
   const [index, setIndex] = useState(art.i)
   const [pictures, setPictures] = useState(location.state.pictures)
   const [board, setBoard] = useState([])
-  console.log(art)
+  console.log(pictures)
   useEffect(() => {
+    if(board.art) {
+      axios.get(`/art/${art.img.board}`).then((response) => {
     
-    axios.get(`/pictures/${art.img.board}`).then((response) => {
+        setPictures(response.data);
+       
+      });
+    }
+    else {
+      axios.get(`/pictures/${art.img.board}`).then((response) => {
     
-      setPictures(response.data);
-    });
-  }, []);
+        setPictures(response.data);
+       
+      });
+    }
+    
+  }, [board]);
   useEffect(() => {
   
     axios.get(`/boards/${art.img.board}`).then((response) => {
@@ -120,6 +130,7 @@ console.log(total)
 
   return (
     <>
+    <section className='page'>
     {data.img && 
       <section onClick={closeImage} className='overlay'>
         <section className='zoom-image'>
@@ -133,6 +144,7 @@ console.log(total)
         <a onClick={slide} href='/slideshow'>START SLIDESHOW</a>
     </header>
     <section className='slideshow' >
+      {/* <nav><Link to ={`/profile/${board._id}`}>{board.name}</Link></nav> */}
       {board && board.art ?
        <section className='slideshow-container '>
        <section className='image-container'>
@@ -197,7 +209,10 @@ console.log(total)
     </div> */}
     </section>}
   
-  {board.art ?
+
+  
+    </section>
+    {board.art ?
    <section className='progress-container'>
    <div class="progress">
        <div style={{flexBasis: progress + "%"}} class="progress__filled"></div>
@@ -225,7 +240,6 @@ console.log(total)
       </section>
     </section>
   }
-  
     </section>
   </>
   )

@@ -83,7 +83,7 @@ const OnCheckboxClick= (e) => {
     <>
     {popup && 
       <section onClick={closeImage} className='overlay'>
-        <section className='modal'>
+        <form onSubmit={addBoard} className='modal'>
           <h2>Create a board</h2>
           <label htmlFor='boardName'>Name</label>
           <input autoFocus onChange={(e) => setName(e.target.value)} autoComplete='off' id='boardName' type="text" placeholder='Board name'></input>
@@ -95,12 +95,12 @@ const OnCheckboxClick= (e) => {
 </label>
 <span className={artCollection ? 'selected' : ''}>art collection</span>
 </div>
-          <button onClick={addBoard} disabled={!name}>Create</button>
-        </section>
+          <button disabled={!name}>Create</button>
+        </form>
       </section>
       }
   
-        <Header/>
+        <Header page={'boards'}/>
         <section className='container'>
           {boards && boards.map((board, index) => (
             <section onMouseEnter={() => setHovered(index)} onMouseLeave={() => setHovered(null)}  key={index} className='cardContainer'>

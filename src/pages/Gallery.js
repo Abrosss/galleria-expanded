@@ -18,6 +18,7 @@ function Home() {
   const [updatePictures, setUpdatePictures] = useState(false)
   const [linksPopup, setLinksPopup] = useState(false)
   const [inputList, setInputList] = useState([{}]);
+  const [error, setError] = useState(null)
   const [thumbnails, setThumbnails] = useState([])
   const navigate = useNavigate();
 
@@ -69,7 +70,8 @@ function Home() {
   }
   const handleAddClick = (e) => {
     e.preventDefault()
-    setInputList([...inputList, {}]);
+    if(inputList.length < 6) setInputList([...inputList, {}]);
+    else setError('you cannot add more')
 
   };
   const handleAddMoreClick = (e) => {
@@ -156,6 +158,7 @@ function Home() {
                 )
               })}
             </ul>
+            {error && <span>{error}</span>}
             <button onClick={handleAddClick}>Add</button>
             <button onClick={addPictures}>Submit</button>
           </section>

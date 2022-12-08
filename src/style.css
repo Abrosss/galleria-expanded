@@ -25,11 +25,12 @@ header {
   align-items: center;
   justify-content: space-between;
   margin: 0 3rem;
-  padding: 2rem 0;
+  padding: 1rem 0;
   border-bottom: 1px #E5E5E5 solid;
   opacity: 0;
   -webkit-animation: appear 0.5s forwards ease-in;
           animation: appear 0.5s forwards ease-in;
+  height: 10%;
 }
 header a {
   font-size: 0.8rem;
@@ -105,13 +106,13 @@ img {
 }
 
 .image-container__image {
-  width: 32rem;
+  width: 30rem;
   display: flex;
   position: relative;
 }
 .image-container__image img {
-  -o-object-fit: cover;
-     object-fit: cover;
+  -o-object-fit: contain;
+     object-fit: contain;
 }
 
 .caption {
@@ -216,13 +217,19 @@ img {
   display: block;
 }
 
+.slideshow {
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+}
+
 .slideshow-container {
   width: 100%;
   height: 100%;
   display: flex;
+  justify-content: center;
   padding: 6rem 3rem;
   gap: 25%;
-  margin-bottom: 6rem;
   opacity: 0;
   -webkit-animation: appear 0.5s forwards ease-in;
           animation: appear 0.5s forwards ease-in;
@@ -258,8 +265,17 @@ img {
   font-size: 1rem;
 }
 
+.page {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  position: relative;
+}
+
 .slideshow-container.center {
   justify-content: center;
+  padding: 0;
+  padding-bottom: 0;
 }
 
 .progress-container {
@@ -269,6 +285,7 @@ img {
   align-items: center;
   padding: 1.5rem 3rem;
   position: relative;
+  height: 10%;
 }
 .progress-container .progress {
   flex: 10;
@@ -599,6 +616,7 @@ img {
          columns: auto 1;
   }
   .slideshow-container {
+    justify-content: center;
     padding: 0;
     flex-direction: column;
     gap: 0rem;
@@ -677,6 +695,7 @@ img {
   header {
     margin: 0;
     padding: 1rem 1.5rem;
+    height: 10%;
   }
   header a {
     font-size: 0.5rem;
@@ -735,6 +754,7 @@ img {
   .slideshow-container {
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     margin: 0;
     padding-bottom: 4rem;
     gap: 2rem;
