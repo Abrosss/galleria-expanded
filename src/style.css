@@ -287,6 +287,7 @@ img {
   padding: 1.5rem 3rem;
   position: relative;
   height: 10%;
+  gap: 2rem;
 }
 .progress-container .progress {
   flex: 10;
@@ -306,6 +307,22 @@ img {
   flex: 0;
   flex-basis: 0%;
   transition: all 0.5s;
+}
+.progress-container .secondsPerSlide {
+  width: 2rem;
+  text-align: center;
+  border: none;
+  border-bottom: 1px rgb(53, 53, 53) solid;
+}
+.progress-container .secondsPerSlide:focus {
+  outline: none;
+  border: none;
+  border-bottom: 1px rgb(53, 53, 53) solid;
+}
+.progress-container .changePerSlide {
+  display: flex;
+  gap: 0.5rem;
+  color: #7D7D7D;
 }
 
 .masonry {
@@ -332,7 +349,7 @@ img {
 
 .controls {
   display: flex;
-  gap: 4rem;
+  gap: 2rem;
 }
 .controls img {
   width: 1.7rem;

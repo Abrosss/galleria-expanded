@@ -1,8 +1,10 @@
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import {useLocation} from 'react-router-dom';
 import back from '../shared/icon-back-button.svg'
 import next from '../shared/icon-next-button.svg'
+import play from '../shared/play.svg'
+import pause from '../shared/pause.svg'
 import view from '../shared/icon-view-image.svg'
 import gallery from '../data.json'
 import logo from '../shared/logo.svg';
@@ -17,8 +19,11 @@ function Slideshow() {
   const [slideshow, setSlideshow] = useState(location.state.slide)
   const [index, setIndex] = useState(art.i)
   const [pictures, setPictures] = useState(location.state.pictures)
+  const [secondsPerSlide, setSecondsPerSlide] = useState(4)
   const [board, setBoard] = useState([])
-  console.log(pictures)
+
+  const secondsInput = useRef()
+  console.log(secondsPerSlide)
   useEffect(() => {
     if(board.art) {
       axios.get(`/art/${art.img.board}`).then((response) => {
@@ -79,6 +84,12 @@ console.log(response.data[0])
       setProgress(Math.round(((art.i-1) / (pictures.length)) * 100))
     }
    }
+   if( action === 'pause') {
+    setSlideshow(false)
+   }
+   if( action === 'play') {
+    setSlideshow(true)
+   }
   }
 
   // useEffect(() => {
@@ -88,7 +99,7 @@ console.log(response.data[0])
   useEffect(() => {
    
  
-    let  myInterval = setInterval(() => slider(4),1000);
+    let  myInterval = setInterval(() => slider(secondsPerSlide),1000);
     return () => {
       clearInterval(myInterval)
     }
@@ -124,8 +135,15 @@ console.log(total)
   
   const slide = (e) => {
     e.preventDefault()
-    setSlideshow(true)
+    setSlideshow(!slideshow)
     
+  }
+
+  function sliderDuration(e, seconds) {
+    e.preventDefault()
+    setSecondsPerSlide(seconds)
+    
+    secondsInput.current.blur()
   }
 
   return (
@@ -221,8 +239,10 @@ console.log(total)
        <h4>{art.img.title}</h4>
        <p>{art.img.artist.name}</p>
      </section>
+
      <section className='controls'>
      <img className='button' onClick={() => action('previous')} src={back} alt="click previous"></img>
+     
      <img className='button' onClick={() => action('next')} src={next} alt="click next"></img>
      </section>
    </section> :
@@ -234,8 +254,15 @@ console.log(total)
         <h4>{art.img.name}</h4>
         <p>{art.img.artist.name}</p>
       </section> */}
+           <section>
+            <div className='changePerSlide'>Change a slide every 
+              <form onSubmit={(e) => sliderDuration(e, secondsInput.current.value)}>
+              <input ref={secondsInput} className='secondsPerSlide' placeholder={secondsPerSlide}></input>
+              </form>
+              seconds</div></section>
       <section className='controls'>
       <img className='button' onClick={() => action('previous')} src={back} alt="click previous"></img>
+     {slideshow ? <img className='button' onClick={() => action('pause')} src={pause} alt="click play"></img> : <img className='button' onClick={() => action('play')} src={play} alt="click play"></img>} 
       <img className='button' onClick={() => action('next')} src={next} alt="click next"></img>
       </section>
     </section>

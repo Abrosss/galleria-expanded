@@ -293,6 +293,7 @@ img {
     padding: 1.5rem 3rem;
     position: relative;
     height: 10%;
+    gap: 2rem;
     .progress {
         flex: 10;
         position: absolute;
@@ -312,6 +313,22 @@ img {
             flex-basis: 0%;
             transition: all .5s;
         }
+    }
+    .secondsPerSlide {
+        width: 2rem;
+        text-align: center;
+        border: none;
+        border-bottom: 1px rgb(53, 53, 53) solid;
+        &:focus {
+            outline: none;
+            border: none;
+            border-bottom: 1px rgb(53, 53, 53) solid;
+        }
+    }
+    .changePerSlide {
+        display: flex;
+        gap: .5rem;
+        color: #7D7D7D;
     }
 }
 
@@ -337,7 +354,7 @@ img {
 
 .controls {
     display: flex;
-    gap: 4rem;
+    gap: 2rem;
 
     img {
         width: 1.7rem;
