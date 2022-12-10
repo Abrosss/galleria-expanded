@@ -20,8 +20,14 @@ function Home() {
   const [inputList, setInputList] = useState([{}]);
   const [error, setError] = useState(null)
   const [thumbnails, setThumbnails] = useState([])
+  const [active, setActive] = useState(0)
   const navigate = useNavigate();
+  const toggle = (i) => {
+    if (active === i)
+          return setActive(null)
+    setActive(i)
 
+}
   const viewImage = (i) => {
 
     let img = pictures[0]
@@ -76,9 +82,15 @@ function Home() {
   };
   const handleAddMoreClick = (e) => {
     e.preventDefault()
+    
+    if (Object.keys(inputList[active]).length === 0) return
     setInputList([...inputList, {}]);
+    setActive(prev => prev + 1)
+   
+    console.log(inputList[active])
 
   };
+  console.log(active)
   const boardName = useRef(null)
   const handleInputChange = (e, index) => {
     const { name, value } = e.target;
@@ -143,6 +155,7 @@ function Home() {
 
     }
   }
+  console.log(active)
   return (
     <>
       {linksPopup &&
@@ -172,6 +185,8 @@ function Home() {
               {inputList && inputList.map((list, i) => {
                 return (
                   <li key={i}>
+                    <h1 onClick={() => toggle(i)}>{list.title || list.link} dwdw</h1>
+                    <form className={i === active ? "show" : ""}>
                     <label for="link">Link</label>
                     <input required id='link' autoFocus autoComplete='off' className='input' onChange={e => handleInputChange(e, i)} type="text" placeholder="Paste an image link" name="link" />
                     <label for="title">Title</label>
@@ -194,6 +209,7 @@ function Home() {
                     <label for="description">Description</label>
                     
                     <textarea id='description'  autoComplete='off' className='input' onChange={e => handleInputChange(e, i)} type="text" placeholder="Description" name="description"></textarea>
+                    </form>
                   </li>
                 )
               })}
