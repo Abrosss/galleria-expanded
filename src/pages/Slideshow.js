@@ -17,6 +17,7 @@ function Slideshow() {
   const [progress, setProgress] = useState(Math.round((art.i / (gallery.length - 1)) * 100))
   const [data, setData] = useState({img: "", i: 0})
   const [slideshow, setSlideshow] = useState(location.state.slide)
+  const [loaded, setLoaded] = useState(false)
   const [index, setIndex] = useState(art.i)
   const [pictures, setPictures] = useState(location.state.pictures)
   const [secondsPerSlide, setSecondsPerSlide] = useState(4)
@@ -42,10 +43,11 @@ function Slideshow() {
     
   }, [board]);
   useEffect(() => {
-  
+    setLoaded(false)
     axios.get(`/boards/${art.img.board}`).then((response) => {
 console.log(response.data[0])
       setBoard(response.data[0]);
+      setLoaded(true)
     });
   }, []);
   const viewImage = (img, i) => {
@@ -165,7 +167,7 @@ console.log(total)
     </header>
     <section className='slideshow' >
       {/* <nav><Link to ={`/profile/${board._id}`}>{board.name}</Link></nav> */}
-      {board && board.art ?
+      {loaded && board.art ?
        <section className='slideshow-container '>
        <section className='image-container'>
        <div className="image-container__image">
@@ -241,13 +243,20 @@ console.log(total)
        <h4>{art.img.title}</h4>
        <p>{art.img.artist.name}</p>
      </section>
-
+     <div className='flex'>
+     <section>
+            <div className='changePerSlide'>Change a slide every 
+              <form onSubmit={(e) => sliderDuration(e, secondsInput.current.value)}>
+              <input ref={secondsInput} className='secondsPerSlide' placeholder={secondsPerSlide}></input>
+              </form>
+              seconds</div></section>
      <section className='controls'>
      <img className='button' onClick={() => action('previous')} src={back} alt="click previous"></img>
      {slideshow ? <img className='button' onClick={() => action('pause')} src={pause} alt="click play"></img> : <img className='button' onClick={() => action('play')} src={play} alt="click play"></img>} 
 
      <img className='button' onClick={() => action('next')} src={next} alt="click next"></img>
      </section>
+     </div>
    </section> :
     <section className='progress-container center'>
     <div class="progress">
