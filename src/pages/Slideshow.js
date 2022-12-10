@@ -141,7 +141,9 @@ console.log(total)
 
   function sliderDuration(e, seconds) {
     e.preventDefault()
-    setSecondsPerSlide(seconds)
+    
+    if(seconds == 0) setSlideshow(false)
+    else setSecondsPerSlide(seconds)
     
     secondsInput.current.blur()
   }
@@ -172,7 +174,7 @@ console.log(total)
          <div><img src={view} alt="art"></img></div>
          <span>VIEW IMAGE</span>
        </div>
-     
+       
      </div>
      <div className='image-container__caption'>
          <div className='text'>
@@ -231,7 +233,7 @@ console.log(total)
   
     </section>
     {board.art ?
-   <section className='progress-container'>
+   <section className='progress-container '>
    <div class="progress">
        <div style={{flexBasis: progress + "%"}} class="progress__filled"></div>
       </div>
@@ -242,11 +244,12 @@ console.log(total)
 
      <section className='controls'>
      <img className='button' onClick={() => action('previous')} src={back} alt="click previous"></img>
-     
+     {slideshow ? <img className='button' onClick={() => action('pause')} src={pause} alt="click play"></img> : <img className='button' onClick={() => action('play')} src={play} alt="click play"></img>} 
+
      <img className='button' onClick={() => action('next')} src={next} alt="click next"></img>
      </section>
    </section> :
-    <section className='progress-container'>
+    <section className='progress-container center'>
     <div class="progress">
         <div style={{flexBasis: progress + "%"}} class="progress__filled"></div>
        </div>
