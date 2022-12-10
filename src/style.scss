@@ -284,7 +284,14 @@ img {
     height: 100vh;
     position: relative;
 }
-.slideshow-container.center {
+.slideshow-container-center {
+    width: 100%;
+    display: flex;
+    gap: 25%;
+    padding: 0 2rem;
+    opacity: 0;
+    animation: appear .5s forwards ease-in;
+    transition: all 5s;
     justify-content: center;
     padding: 0;
     padding-bottom: 0  ;
@@ -343,7 +350,7 @@ img {
         color: #7D7D7D;
     }
 }
-.progress-container.center {
+.progress-container-center {
     justify-content: flex-end;
 }
 .masonry {
@@ -454,7 +461,7 @@ img {
     width: 7rem;
     display: flex;
     position: absolute;
-    bottom: -10%;
+    bottom: -5%;
     left: 1rem;
 }
 
@@ -778,7 +785,7 @@ img {
      
         gap: 2rem;
     }
-    .slideshow-container.center {
+    .slideshow-container-center {
         align-items: center;
     }
     .image-container__caption  {
@@ -794,7 +801,7 @@ img {
        
       }
       .artist {
-        width: 10wrem;
+        width: 10rem;
         bottom: 34%;
       }
     
@@ -834,7 +841,7 @@ img {
         padding-bottom: 4rem;
         gap: 2rem;
       }
-      .slideshow-container.center {
+      .slideshow-container-center {
         .image-container {
             justify-content: center;
           }
@@ -853,7 +860,7 @@ img {
        
       }
       .artist {
-        width: 10wrem;
+        width: 10rem;
         bottom: 43%;
       }
     
