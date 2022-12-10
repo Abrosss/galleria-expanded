@@ -115,6 +115,7 @@ function Home() {
           setUpdatePictures(false)
         }, 100);
         setPictures([...pictures, ...inputList.link]);
+        setInputList([{}])
       }
 
     })
