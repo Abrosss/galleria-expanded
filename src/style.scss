@@ -761,17 +761,25 @@ img {
 }
 
 @media (min-width: 769px) and (max-width: 1000px) {
+    .page {
+        height: 100%;
+    }
     .masonry {
         columns: auto 2;
         padding: 2rem;
     }
-
+    .slideshow {
+        height:unset
+    }
     .slideshow-container {
         flex-direction: column;
-
+        padding-top: 2rem;
         margin: 0;
-        padding-bottom: 4rem;
+     
         gap: 2rem;
+    }
+    .slideshow-container.center {
+        align-items: center;
     }
     .image-container__caption  {
         .text {
@@ -780,17 +788,19 @@ img {
         }
         h2 {
             font-weight: 700;
-            font-size: 3.6rem;
+            font-size: 3rem;
             min-width: 25rem
           }
        
       }
       .artist {
         width: 10wrem;
-        bottom: 43%;
+        bottom: 34%;
       }
     
       .description {
+        padding-top: 8rem;
+        padding-bottom: 2rem;
         padding-left: 8rem;
         font-weight: 700;
         gap: 3rem;
@@ -798,7 +808,7 @@ img {
     
       header {
         margin: 0;
-        padding: 2rem 2.5rem;
+        padding: 1.5rem 2.5rem;
         a {
             font-size: 1.2rem;
           }
@@ -813,7 +823,9 @@ img {
         columns: auto 3;
         padding: 2rem;
       }
-    
+      .slideshow {
+        height:unset
+    }
       .slideshow-container {
         flex-direction: column;
  
