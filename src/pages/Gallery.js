@@ -135,6 +135,7 @@ function Home() {
           setUpdatePictures(false)
         }, 100);
         setArt([...art, ...inputList]);
+        setInputList([{}])
       }
 
     })
@@ -185,7 +186,7 @@ function Home() {
               {inputList && inputList.map((list, i) => {
                 return (
                   <li key={i}>
-                    <h1 onClick={() => toggle(i)}>{list.title || list.link} dwdw</h1>
+                    <h1 onClick={() => toggle(i)}><span>{i+1}.</span><span className='title'>{(list.title || list.link)}</span></h1>
                     <form className={i === active ? "show" : ""}>
                     <label for="link">Link</label>
                     <input required id='link' autoFocus autoComplete='off' className='input' onChange={e => handleInputChange(e, i)} type="text" placeholder="Paste an image link" name="link" />
@@ -214,8 +215,11 @@ function Home() {
                 )
               })}
             </ul>
+            <div className='buttons'>
             <button onClick={handleAddMoreClick}>Add more</button>
             <button onClick={addArt}>Submit</button>
+            </div>
+            
           </section>
         </section>
       }
