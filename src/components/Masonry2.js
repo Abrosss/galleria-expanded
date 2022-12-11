@@ -9,10 +9,17 @@ function Masonry(props) {
   const [hovered, setHovered] = useState(null)
   const [thumbnails, setThumbnails] = useState([])
   console.log(thumbnails)
+
   useEffect(() => {
     setPics(props.imageUrls);
 }, [props.imageUrls])
 
+useEffect(() => {
+  axios.put(`/boards/thumbnails/${props.id}`, {
+    thumbnails: pics.slice(0, 4)
+
+  }).catch(err => console.log(err))
+}, [pics])
 // useEffect(() => {
 
 

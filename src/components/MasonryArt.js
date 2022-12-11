@@ -28,6 +28,12 @@ function MasonryArt(props) {
 
   
 // }, [pics])
+useEffect(() => {
+  axios.put(`/boards/thumbnails/${props.id}`, {
+    thumbnails: pics.slice(0, 4)
+
+  }).catch(err => console.log(err))
+}, [pics])
   async function deleteBoard(id, board) {
 
     try {
