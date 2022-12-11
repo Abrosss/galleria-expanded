@@ -29,7 +29,7 @@ function Home() {
     setActive(i)
 
   }
-  console.log(board)
+
   const viewImage = (i) => {
 
     let img = pictures[0]
@@ -48,7 +48,7 @@ function Home() {
   useEffect(() => {
 
     if (location.state.art) {
-      console.log(location.state.art)
+
       axios.get(`/art/${location.state.id}`).then((response) => {
 
         setPictures(response.data);
@@ -84,15 +84,15 @@ function Home() {
   };
   const handleAddMoreClick = (e) => {
     e.preventDefault()
-
+    
     if (Object.keys(inputList[active]).length === 0) return
     setInputList([...inputList, {}]);
     setActive(prev => prev + 1)
 
-    console.log(inputList[active])
+    
 
   };
-  console.log(active)
+
   const boardName = useRef(null)
   const handleInputChange = (e, index) => {
     const { name, value } = e.target;
@@ -103,7 +103,7 @@ function Home() {
   };
 
   async function addPictures(e) {
-    console.log(inputList)
+
     e.preventDefault()
     await axios.post('/addPicture', {
       links: inputList,
@@ -125,8 +125,10 @@ function Home() {
 
   }
   async function addArt(e) {
-    console.log(inputList)
+ 
     e.preventDefault()
+   let notDone = inputList.filter(list => !list.link )
+   if (notDone.length > 0) return
     await axios.post('/addArt', {
       links: inputList,
       board: location.state.id
@@ -148,7 +150,7 @@ function Home() {
   const handleKeyPress = (event, text) => {
     if (event.key === 'Enter') {
       event.currentTarget.setAttribute("contenteditable", false)
-      console.log(boardName.current.textContent)
+      
       axios.put(`/boards/${location.state.id}`, {
         name: boardName.current.textContent,
 
@@ -159,7 +161,7 @@ function Home() {
 
     }
   }
-  console.log(active)
+
   return (
     <>
       {linksPopup &&
@@ -191,8 +193,8 @@ function Home() {
                   <li key={i}>
                     <h1 onClick={() => toggle(i)}><span>{i + 1}.</span><span className='title'>{list.title}</span></h1>
                     <form className={i === active ? "show" : ""}>
-                      <input required id='title' autoComplete='off' className='input' onChange={e => handleInputChange(e, i)} type="text" placeholder="Title" name="title" />
-                      <input required id='link' autoFocus autoComplete='off' className='input' onChange={e => handleInputChange(e, i)} type="text" placeholder="Image link" name="link" />
+                      <input autoFocus required id='title' autoComplete='off' className='input' onChange={e => handleInputChange(e, i)} type="text" placeholder="Title" name="title" />
+                      <input required id='link'  autoComplete='off' className='input' onChange={e => handleInputChange(e, i)} type="text" placeholder="Image link" name="link" />
                       <textarea maxLength="840" id='description' autoComplete='off' className='input' onChange={e => handleInputChange(e, i)} type="text" placeholder="Description" name="description"></textarea>
                      
 
