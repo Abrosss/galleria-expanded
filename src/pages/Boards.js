@@ -55,14 +55,20 @@ function Home() {
      })
      .catch(err=>console.log(err))
   }
-
+console.log(boards)
   async function deleteBoard(id) {
-
+console.log(id)
     try {
-       axios.delete(`/boards/${id}`);
+     
       const updatedBoards = boards.filter(board => board._id !== id);
-      console.log(updatedBoards)
-      setBoards(updatedBoards)
+      await axios.delete(`/boards/${id}`)
+      .then(res => {
+        if(res.status === 200) {
+          console.log(res)
+          setBoards(updatedBoards)
+      }})
+      .catch(err=>console.log(err))
+     
      
     } catch (err) {
       console.log(err);
@@ -111,7 +117,7 @@ const OnCheckboxClick= (e) => {
             } })}   className='card'>
               <div className='thumbnails'>
            
-              <Thumbnail art={board.art} id={board._id}/>
+              {boards && <Thumbnail thumbs={board.thumbnails} art={board.art} id={board._id}/>}
               </div>
             </section>
             <span>{board.name}</span>

@@ -44,7 +44,13 @@ function Home() {
     });
 
   }
+ console.log(pictures.slice(0, 4))
+useEffect(() => {
+  axios.put(`/boards/thumbnails/${board._id}`, {
+    thumbnails: pictures.slice(0, 4)
 
+  }).catch(err => console.log(err))
+}, [updatePictures])
   useEffect(() => {
 
     if (location.state.art) {
@@ -161,7 +167,7 @@ function Home() {
 
     }
   }
-
+  
   return (
     <>
       {linksPopup &&

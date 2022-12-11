@@ -1,9 +1,9 @@
 import React from 'react'
 import axios from '../api/axios';
 import { useState, useEffect } from 'react';
-function Thumbnail({id, art}) {
+function Thumbnail({thumbs, id, art}) {
     const [pictures, setPictures] = useState([])
-
+console.log(id)
     useEffect(() => {
       if(art) {
         axios.get(`/art/${id}`).then((response) => {
@@ -26,7 +26,7 @@ function Thumbnail({id, art}) {
       console.log(pictures)
   return (
     <>
-    {pictures && pictures.map(pic => (
+    {thumbs && thumbs.map(pic => (
         <img src={pic.image}></img>
     ))}
     </>
