@@ -113,6 +113,7 @@ img {
 .image-container__image {
     position: relative;
     min-width: 25rem;
+    max-width: 40rem;
     display: flex;
     
     img {

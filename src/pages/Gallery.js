@@ -22,6 +22,7 @@ function Home() {
   const [error, setError] = useState(null)
   const [thumbnails, setThumbnails] = useState([])
   const [active, setActive] = useState(0)
+
   const navigate = useNavigate();
   const toggle = (i) => {
     if (active === i)
@@ -44,13 +45,13 @@ function Home() {
     });
 
   }
- console.log(pictures.slice(0, 4))
-useEffect(() => {
-  axios.put(`/boards/thumbnails/${board._id}`, {
-    thumbnails: pictures.slice(0, 4)
+  console.log(pictures.slice(0, 4))
+  useEffect(() => {
+    axios.put(`/boards/thumbnails/${board._id}`, {
+      thumbnails: pictures.slice(0, 4)
 
-  }).catch(err => console.log(err))
-}, [updatePictures])
+    }).catch(err => console.log(err))
+  }, [updatePictures])
   useEffect(() => {
 
     if (location.state.art) {
@@ -90,12 +91,12 @@ useEffect(() => {
   };
   const handleAddMoreClick = (e) => {
     e.preventDefault()
-    
+
     if (Object.keys(inputList[active]).length === 0) return
     setInputList([...inputList, {}]);
     setActive(prev => prev + 1)
 
-    
+
 
   };
 
@@ -111,52 +112,61 @@ useEffect(() => {
   async function addPictures(e) {
 
     e.preventDefault()
-    await axios.post('/addPicture', {
-      links: inputList,
-      board: location.state.id
-    }).then(res => {
-      if (res.status === 200) {
-        setLinksPopup(false)
-        setThumbnails(thumbnails => [...thumbnails, ...inputList]);
-        setUpdatePictures(res.data)
-        setTimeout(() => {
-          setUpdatePictures(false)
-        }, 100);
-        setPictures([...pictures, ...inputList.link]);
-        setInputList([{}])
+    try {
+      const response = await axios.post('/addPicture', {
+        links: inputList,
+        board: location.state.id,
+      });
+      if (response.status === 200) {
+        updateState(response.data, inputList, 'pictures');
       }
 
-    })
-      .catch(err => console.log(err))
+
+    } catch (err) {
+
+      console.error(err);
+    }
+   
 
   }
   async function addArt(e) {
- 
+
     e.preventDefault()
-   let notDone = inputList.filter(list => !list.link )
-   if (notDone.length > 0) return
-    await axios.post('/addArt', {
-      links: inputList,
-      board: location.state.id
-    }).then(res => {
-      if (res.status === 200) {
-        setLinksPopup(false)
-        setUpdatePictures(res.data)
-        setTimeout(() => {
-          setUpdatePictures(false)
-        }, 100);
-        setArt([...art, ...inputList]);
-        setInputList([{}])
+    let notDone = inputList.filter(list => !list.link)
+    if (notDone.length > 0) return
+    try {
+      const response = await axios.post('/addArt', {
+        links: inputList,
+        board: location.state.id,
+      });
+      if (response.status === 200) {
+        updateState(response.data, inputList, 'art');
       }
 
-    })
-      .catch(err => console.log(err))
 
+    } catch (err) {
+
+      console.error(err);
+    }
+  }
+
+  function updateState(responseData, inputList, stateVar) {
+    setLinksPopup(false);
+    setUpdatePictures(responseData);
+    setTimeout(() => {
+      setUpdatePictures(false);
+    }, 100);
+    if (stateVar === 'pictures') {
+      setPictures([...pictures, ...inputList.link]);
+    } else if (stateVar === 'art') {
+      setArt([...art, ...inputList]);
+    }
+    setInputList([{}]);
   }
   const handleKeyPress = (event, text) => {
     if (event.key === 'Enter') {
       event.currentTarget.setAttribute("contenteditable", false)
-      
+
       axios.put(`/boards/${location.state.id}`, {
         name: boardName.current.textContent,
 
@@ -167,7 +177,7 @@ useEffect(() => {
 
     }
   }
-  
+
   return (
     <>
       {linksPopup &&
@@ -176,9 +186,13 @@ useEffect(() => {
             <h2>Add links</h2>
             <ul className="links">
               {inputList && inputList.map((list, i) => {
+                const inputProps = {
+                  autoComplete: 'off',
+                  onChange: e => handleInputChange(e, i),
+                };
                 return (
                   <li key={i}>
-                    <input autoFocus autoComplete='off' className='input' onChange={e => handleInputChange(e, i)} type="text" placeholder="Paste a link" name="link" />
+                    <input {...inputProps} autoFocus className='input' type="text" placeholder="Paste a link" name="link" />
                   </li>
                 )
               })}
@@ -195,31 +209,33 @@ useEffect(() => {
             <h2>Add a picture</h2>
             <ul className="links">
               {inputList && inputList.map((list, i) => {
+                const inputProps = {
+                  autoComplete: 'off',
+                  onChange: e => handleInputChange(e, i),
+                };
                 return (
                   <li key={i}>
                     <h1 onClick={() => toggle(i)}><span>{i + 1}.</span><span className='title'>{list.title}</span></h1>
                     <form className={i === active ? "show" : ""}>
-                      <input autoFocus required id='title' autoComplete='off' className='input' onChange={e => handleInputChange(e, i)} type="text" placeholder="Title" name="title" />
-                      <input required id='link'  autoComplete='off' className='input' onChange={e => handleInputChange(e, i)} type="text" placeholder="Image link" name="link" />
-                      <textarea maxLength="840" id='description' autoComplete='off' className='input' onChange={e => handleInputChange(e, i)} type="text" placeholder="Description" name="description"></textarea>
-                     
-
+                      <input {...inputProps} autoFocus required id='title' className='input' type="text" placeholder="Title" name="title" />
+                      <input {...inputProps} required id='link' className='input' type="text" placeholder="Image link" name="link" />
+                      <textarea {...inputProps} maxLength="840" id='description' className='input' type="text" placeholder="Description" name="description"></textarea>
 
                       <div className='flex'>
                         <div>
 
-                          <input required id='artist' autoComplete='off' className='input' onChange={e => handleInputChange(e, i)} type="text" placeholder="Artist name" name="artist" />
+                          <input {...inputProps} required id='artist' className='input' type="text" placeholder="Artist name" name="artist" />
                         </div>
                         <div>
 
-                          <input required id='year' autoComplete='off' className='input' onChange={e => handleInputChange(e, i)} type="text" placeholder="Year" name="year" />
+                          <input {...inputProps} required id='year' className='input' type="text" placeholder="Year" name="year" />
 
                         </div>
                       </div>
 
-                      <input id='artistlink' autoComplete='off' className='input' onChange={e => handleInputChange(e, i)} type="text" placeholder="Artist image link (optional)" name="artistlink" />
+                      <input {...inputProps} id='artistlink' className='input' type="text" placeholder="Artist image link (optional)" name="artistlink" />
 
-                      <input id='source' autoComplete='off' className='input' onChange={e => handleInputChange(e, i)} type="text" placeholder="Source link (wiki)" name="wiki" />
+                      <input {...inputProps} id='source' className='input' type="text" placeholder="Source link (wiki)" name="wiki" />
 
 
 
