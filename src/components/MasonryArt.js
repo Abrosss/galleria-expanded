@@ -4,7 +4,7 @@ import {useNavigate} from 'react-router-dom';
 import trash from '../shared/trash.svg'
 import axios from '../api/axios';
 import { useState, useEffect } from 'react';
-function Masonry(props) {
+function MasonryArt(props) {
   const [pics, setPics] = useState(props.imageUrls)
   const [hovered, setHovered] = useState(null)
   const [thumbnails, setThumbnails] = useState([])
@@ -29,16 +29,17 @@ function Masonry(props) {
   
 // }, [pics])
   async function deleteBoard(id, board) {
-  
+
     try {
       const updatedPics = pics.filter(pic => pic._id !== id);
-      await axios.delete(`/pictures/${id}`)
+      
+ 
+      await axios.delete(`/art/${id}`)
       .then(res => {
         if(res.status === 200) {
           setPics(updatedPics)
       }})
       .catch(err=>console.log(err))
-      
      
     } catch (err) {
       console.log(err);
@@ -67,8 +68,11 @@ function Masonry(props) {
          
         <div onMouseEnter={() => setHovered(i)} onMouseLeave={() => setHovered(null)} className='image-container'>
         <div data-id={img._id} onClick={() => deleteBoard(img._id, img.board)} className={hovered === i ? 'trash show' : 'trash'}><img data-id={img._id}  src={trash}></img></div> 
-      <img className='img' src={img.image} alt="thumbnail"   ></img>
-    
+      <img className='img dimmed' src={img.image} alt="thumbnail"   ></img>
+      <div className='caption'>
+        <h2>{img.title}</h2>
+        <p>{img.artist && img.artist.name}</p>
+      </div>
       </div>
     </div>
       
@@ -78,4 +82,4 @@ function Masonry(props) {
   )
 }
 
-export default Masonry
+export default MasonryArt

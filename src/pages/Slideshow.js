@@ -143,7 +143,7 @@ function Slideshow() {
       <section className='page'>
 
         <header>
-          <Link to='/'><img src={logo} alt="logo"></img></Link>
+          <Link to='/profile'><img src={logo} alt="logo"></img></Link>
           <a onClick={slide} href='/slideshow'>START SLIDESHOW</a>
         </header>
         {loaded && !board.art && <SlideshowSinglePics art={art} />}

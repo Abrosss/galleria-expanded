@@ -82,7 +82,8 @@ img {
 .image-container {
     position: relative;
     display: flex;
- 
+    cursor: pointer;
+    height: 100%;
 }
 .checklist {
     display: flex;
@@ -111,7 +112,7 @@ img {
 
 .image-container__image {
     position: relative;
-    width: 30rem;
+    min-width: 25rem;
     display: flex;
     
     img {
@@ -153,6 +154,9 @@ img {
     &:hover{
         filter: brightness(60%)
     }
+}
+.img.dimmed {
+    filter: brightness(60%)
 }
 .wrapper{
     height:1.5rem;
@@ -232,6 +236,7 @@ img {
 }
 .slideshow-container {
     width: 100%;
+    height:90%;
 
     display: flex;
 
@@ -283,6 +288,7 @@ img {
     flex-direction: column;
     height: 100vh;
     position: relative;
+    overflow-x: hidden;
 }
 .slideshow-container-center {
     width: 100%;
@@ -468,7 +474,7 @@ img {
 .description {
     position: relative;
     padding-top: 8rem;
-    padding-right: 5rem;
+
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -483,6 +489,7 @@ img {
     z-index: -1;
     color: $light-light-gray;
     font-weight: 700;
+    user-select: none;
 }
 .modal {
     width: 45rem;
@@ -530,8 +537,22 @@ img {
     gap: 1rem;
     overflow-y: scroll;
     overflow-x: hidden;
+    input, textarea {
+        border: none;
+        border-bottom: 1px #324047 solid;
+        border-radius: unset;
+        &:focus {
+            outline: none;
+            border: none;
+            border-bottom: 1px #324047 solid;
+            background-color: rgba(250, 235, 215, .3)
+        }
+    }
     li {
         word-wrap: break-word;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
     
     }
     li h1 {
@@ -542,7 +563,11 @@ img {
         font-size: 1rem;
         word-wrap: break-word;
         width: 100%;
-      
+        padding: .5rem 0;
+      &:hover {
+        background-color: rgba(252, 215, 131,0.5);
+
+      }
     }
     li form{
         display: none;
@@ -570,7 +595,7 @@ img {
     align-items: center;
     padding-top: 1rem;
     h2 {
-        font-size: 2rem;
+        font-size: 1.8rem;
     }
 }
 .addButton {

@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 
 import Masonry from '../components/Masonry2';
+import MasonryArt from '../components/MasonryArt'
 import { useLocation } from 'react-router-dom';
 import { Link, useNavigate } from 'react-router-dom'
 
@@ -24,10 +25,11 @@ function Home() {
   const navigate = useNavigate();
   const toggle = (i) => {
     if (active === i)
-          return setActive(null)
+      return setActive(null)
     setActive(i)
 
-}
+  }
+  console.log(board)
   const viewImage = (i) => {
 
     let img = pictures[0]
@@ -45,7 +47,7 @@ function Home() {
 
   useEffect(() => {
 
-    if(location.state.art) {
+    if (location.state.art) {
       console.log(location.state.art)
       axios.get(`/art/${location.state.id}`).then((response) => {
 
@@ -57,16 +59,16 @@ function Home() {
       setPictures(response.data);
     });
   }, [updatePictures]);
-  
+
   useEffect(() => {
-    
+
     axios.get(`/boards/${location.state.id}`).then((response) => {
 
       setBoard(response.data[0]);
     });
   }, []);
 
- 
+
   const closeImage = (e) => {
     if (e.target.className === "overlay") {
       if (linksPopup) setLinksPopup(false)
@@ -76,17 +78,17 @@ function Home() {
   }
   const handleAddClick = (e) => {
     e.preventDefault()
-    if(inputList.length < 6) setInputList([...inputList, {}]);
+    if (inputList.length < 6) setInputList([...inputList, {}]);
     else setError('you cannot add more')
 
   };
   const handleAddMoreClick = (e) => {
     e.preventDefault()
-    
+
     if (Object.keys(inputList[active]).length === 0) return
     setInputList([...inputList, {}]);
     setActive(prev => prev + 1)
-   
+
     console.log(inputList[active])
 
   };
@@ -103,7 +105,7 @@ function Home() {
   async function addPictures(e) {
     console.log(inputList)
     e.preventDefault()
-   await axios.post('/addPicture', {
+    await axios.post('/addPicture', {
       links: inputList,
       board: location.state.id
     }).then(res => {
@@ -125,7 +127,7 @@ function Home() {
   async function addArt(e) {
     console.log(inputList)
     e.preventDefault()
-   await axios.post('/addArt', {
+    await axios.post('/addArt', {
       links: inputList,
       board: location.state.id
     }).then(res => {
@@ -182,45 +184,47 @@ function Home() {
       {linksPopup && board.art &&
         <section onClick={closeImage} className='overlay'>
           <section className='modal'>
-            <h2>Add art</h2>
+            <h2>Add a picture</h2>
             <ul className="links">
               {inputList && inputList.map((list, i) => {
                 return (
                   <li key={i}>
-                    <h1 onClick={() => toggle(i)}><span>{i+1}.</span><span className='title'>{(list.title || list.link)}</span></h1>
+                    <h1 onClick={() => toggle(i)}><span>{i + 1}.</span><span className='title'>{list.title}</span></h1>
                     <form className={i === active ? "show" : ""}>
-                    <label for="link">Link</label>
-                    <input required id='link' autoFocus autoComplete='off' className='input' onChange={e => handleInputChange(e, i)} type="text" placeholder="Paste an image link" name="link" />
-                    <label for="title">Title</label>
-                    <input required id='title'  autoComplete='off' className='input' onChange={e => handleInputChange(e, i)} type="text" placeholder="Title" name="title" />
-                    <div className='flex'>
-                      <div>
-                    <label for="artist">Artist</label>
-                    <input required id='artist'  autoComplete='off' className='input' onChange={e => handleInputChange(e, i)} type="text" placeholder="Artist" name="artist" />
-                    </div>
-                    <div>
-                    <label for="year">Year</label>
-                    <input required id='year'  autoComplete='off' className='input' onChange={e => handleInputChange(e, i)} type="text" placeholder="Year" name="year" />
-                    
-                    </div>
-                    </div>
-                    <label for="artistlink">Artist image link</label>
-                    <input id='artistlink'  autoComplete='off' className='input' onChange={e => handleInputChange(e, i)} type="text" placeholder="Add an artist image" name="artistlink" />
-                    <label for="source">Source</label>
-                    <input id='source'  autoComplete='off' className='input' onChange={e => handleInputChange(e, i)} type="text" placeholder="Link to wiki" name="wiki" />
-                    <label for="description">Description</label>
-                    
-                    <textarea id='description'  autoComplete='off' className='input' onChange={e => handleInputChange(e, i)} type="text" placeholder="Description" name="description"></textarea>
+                      <input required id='title' autoComplete='off' className='input' onChange={e => handleInputChange(e, i)} type="text" placeholder="Title" name="title" />
+                      <input required id='link' autoFocus autoComplete='off' className='input' onChange={e => handleInputChange(e, i)} type="text" placeholder="Image link" name="link" />
+                      <textarea maxLength="840" id='description' autoComplete='off' className='input' onChange={e => handleInputChange(e, i)} type="text" placeholder="Description" name="description"></textarea>
+                     
+
+
+                      <div className='flex'>
+                        <div>
+
+                          <input required id='artist' autoComplete='off' className='input' onChange={e => handleInputChange(e, i)} type="text" placeholder="Artist name" name="artist" />
+                        </div>
+                        <div>
+
+                          <input required id='year' autoComplete='off' className='input' onChange={e => handleInputChange(e, i)} type="text" placeholder="Year" name="year" />
+
+                        </div>
+                      </div>
+
+                      <input id='artistlink' autoComplete='off' className='input' onChange={e => handleInputChange(e, i)} type="text" placeholder="Artist image link (optional)" name="artistlink" />
+
+                      <input id='source' autoComplete='off' className='input' onChange={e => handleInputChange(e, i)} type="text" placeholder="Source link (wiki)" name="wiki" />
+
+
+
                     </form>
                   </li>
                 )
               })}
             </ul>
             <div className='buttons'>
-            <button onClick={handleAddMoreClick}>Add more</button>
-            <button onClick={addArt}>Submit</button>
+              <button onClick={handleAddMoreClick}>Add more</button>
+              <button onClick={addArt}>Submit</button>
             </div>
-            
+
           </section>
         </section>
       }
@@ -230,7 +234,8 @@ function Home() {
       </header>
       <section className='board-pins'>
         <h2 autoCorrect='off' ref={boardName} contentEditable autoComplete onKeyPress={(e) => handleKeyPress(e, e.currentTarget.textContent)} >{board.name}</h2>
-        <Masonry id={board._id} imageUrls={pictures} columnCount="4" />
+        {board.art ? <MasonryArt id={board._id} imageUrls={pictures} columnCount="4" /> : <Masonry id={board._id} imageUrls={pictures} columnCount="4" />}
+
         <button onClick={() => setLinksPopup(true)} className='addButton'><img src={plus}></img></button>
       </section>
 
