@@ -16,7 +16,7 @@ function Home() {
   const [board, setBoard] = useState([])
   const [pictures, setPictures] = useState([])
   const [art, setArt] = useState([])
-
+  const [updatePictures, setUpdatePictures] = useState(false)
   const [linksPopup, setLinksPopup] = useState(false)
   const [inputList, setInputList] = useState([{}]);
   const [error, setError] = useState(null)
@@ -64,7 +64,7 @@ function Home() {
     fetchData(location.state.id, location.state.art).then(data => {
       setPictures(data);
     });
-  }, [pictures]);
+  }, [updatePictures]);
 
   useEffect(() => {
 
@@ -151,7 +151,10 @@ function Home() {
 
   function updateState(responseData, inputList, stateVar) {
     setLinksPopup(false);
-
+    setUpdatePictures(responseData);
+    setTimeout(() => {
+      setUpdatePictures(false);
+    }, 100);
     if (stateVar === 'pictures') {
       const newPictures = [...pictures, ...inputList.link]
       setPictures(newPictures);
