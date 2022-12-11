@@ -16,6 +16,7 @@ function Home() {
   const [board, setBoard] = useState([])
   const [pictures, setPictures] = useState([])
   const [art, setArt] = useState([])
+
   const [linksPopup, setLinksPopup] = useState(false)
   const [inputList, setInputList] = useState([{}]);
   const [error, setError] = useState(null)
@@ -150,8 +151,10 @@ function Home() {
 
   function updateState(responseData, inputList, stateVar) {
     setLinksPopup(false);
+
     if (stateVar === 'pictures') {
-      setPictures([...pictures, ...inputList.link]);
+      const newPictures = [...pictures, ...inputList.link]
+      setPictures(newPictures);
     } else if (stateVar === 'art') {
       setArt([...art, ...inputList]);
     }
