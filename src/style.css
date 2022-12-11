@@ -526,6 +526,17 @@ img {
   overflow-y: scroll;
   overflow-x: hidden;
 }
+.links::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #F5F5F5;
+}
+.links::-webkit-scrollbar {
+  width: 4px;
+  background-color: #F5F5F5;
+}
+.links::-webkit-scrollbar-thumb {
+  background-color: #000000;
+}
 .links input, .links textarea {
   border: none;
   border-bottom: 1px #324047 solid;
