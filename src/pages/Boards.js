@@ -105,7 +105,7 @@ const OnCheckboxClick= (e) => {
         </form>
       </section>
       }
-  
+  <section className='page'>
         <Header page={'boards'}/>
         <section className='container'>
           {boards && boards.map((board, index) => (
@@ -124,9 +124,10 @@ const OnCheckboxClick= (e) => {
             </section>
           ))}
           
-          <button onClick={() => setPopup(true)}  title='Create a board' className='plus'>
+          <button onClick={() => setPopup(true)}  title='Create a board' className='addButton'>
           <img src={plus}></img>
           </button>
+        </section>
         </section>
         </>
   )
