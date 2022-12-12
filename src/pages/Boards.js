@@ -29,9 +29,7 @@ function Home() {
     });
   }, []);
 
-  function editBoard(board) {
 
-  }
   const closeImage = (e) => {
     if (e.target.className === "overlay") {
       setPopup(false)
@@ -92,8 +90,25 @@ function Home() {
       setArtCollection(false)
     }
   }
+  function editBoard(e, id) {
+    e.preventDefault()
+    axios.put(`/boards/${id}`, {
+      name: name,
+      art: artCollection
 
-  
+    }).then(res => {
+      if (res.status === 200) {
+ 
+        setBoards(boards.map(board => board._id === id ? res.data : board));
+        setEditPopup(null)
+      }
+
+    })
+    
+    
+    .catch(err => console.log(err))
+  }
+
 
   return (
     <>
@@ -117,23 +132,23 @@ function Home() {
       }
       {editPopup &&
         <section onClick={closeImage} className='overlay'>
-          <form onSubmit={addBoard} className='modal'>
+          <form onSubmit={(e) => editBoard(e, editPopup._id)} className='modal'>
             <h2>Edit the board</h2>
             <label htmlFor='boardName'>Name</label>
-            <input autoFocus onChange={(e) => setName(e.target.value)} autoComplete='off' id='boardName' type="text" placeholder='Board name' value={editPopup.name}></input>
+            <input autoFocus onChange={(e) => setName(e.target.value)} autoComplete='off' id='boardName' type="text" placeholder={editPopup.name}></input>
             <div className='checklist'>
               <label class="wrapper">
                 {editPopup.art ?
-                <input onClick={(e) => OnCheckboxClick(e)} checked  type="checkbox" id="checkbox" /> :
-                <input onClick={(e) => OnCheckboxClick(e)}   type="checkbox" id="checkbox" />
-              }
-                
+                  <input onClick={(e) => OnCheckboxClick(e)} checked type="checkbox" id="checkbox" /> :
+                  <input onClick={(e) => OnCheckboxClick(e)} type="checkbox" id="checkbox" />
+                }
+
                 <span class="left"></span>
                 <span class="right"></span>
               </label>
               <span className={editPopup.art ? 'selected' : ''}>art collection</span>
             </div>
-            <button disabled={!name}>Create</button>
+            <button>Create</button>
           </form>
         </section>
       }
