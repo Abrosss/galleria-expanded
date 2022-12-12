@@ -123,10 +123,11 @@ const OnCheckboxClick= (e) => {
             <span className='boardName'>{board.name}</span>
             </section>
           ))}
-          
+          <div className='addButtonContainer'>
           <button onClick={() => setPopup(true)}  title='Create a board' className='addButton'>
           <img src={plus}></img>
           </button>
+          </div>
         </section>
         </section>
         </>

@@ -601,18 +601,29 @@ img {
   font-size: 1.8rem;
 }
 
-.addButton {
-  width: 3rem;
-  height: 3rem;
-  outline: none;
-  border: none;
-  background: transparent;
+.addButtonContainer {
+  width: 6rem;
+  height: 6rem;
+  background-color: white;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: fixed;
   margin-left: auto;
   margin-right: auto;
   bottom: 5%;
   cursor: pointer;
   left: 50%;
+  transform: translateX(-50%);
+}
+
+.addButton {
+  width: 3rem;
+  height: 3rem;
+  outline: none;
+  border: none;
+  background: transparent;
 }
 
 .input {
@@ -726,6 +737,9 @@ img {
   .masonry {
     -moz-columns: auto 1;
          columns: auto 1;
+  }
+  .container {
+    justify-content: center;
   }
   .slideshow-container {
     justify-content: center;
