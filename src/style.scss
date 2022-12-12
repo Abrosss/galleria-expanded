@@ -217,6 +217,10 @@ img {
     right: 2%;
     top: 2%;
     z-index: 250;
+    background-color: #F5F5F5;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
     cursor: pointer;
     img {
         max-width: 100%;
@@ -225,7 +229,7 @@ img {
     }
 }
 .trash.show {
-    display: block;
+    display: flex;
 }
 .slideshow {
     height: 80%;
@@ -656,6 +660,27 @@ img {
     align-items: center;
     gap:1rem;
     position: relative;
+    .settings {
+        background-color: white;
+        
+        
+        position: absolute;
+        right: 0;
+        top: 3rem;
+        z-index: 5;
+        display: none;
+        flex-direction: column;
+    
+        li{
+            padding: 1rem 2rem;
+        }
+        li:hover {
+            background-color: #7D7D7D;
+        }
+    }
+    .settings.show {
+        display: flex;
+    }
     .boardName {
         width: 15rem;
         word-break: break-word;
