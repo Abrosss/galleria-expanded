@@ -46,10 +46,14 @@ function Home() {
   }
   
   useEffect(() => {
-    axios.put(`/boards/thumbnails/${board._id}`, {
-      thumbnails: pictures.slice(0, 4)
-
-    }).catch(err => console.log(err))
+    //make sure the board is loaded
+    if(board !== []) {
+      axios.put(`/boards/thumbnails/${board._id}`, {
+        thumbnails: pictures.slice(0, 4)
+  
+      }).catch(err => console.log(err))
+    }
+   
   }, [pictures])
 
   async function fetchData(id, state) {
