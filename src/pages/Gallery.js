@@ -260,7 +260,10 @@ function Home() {
         <h2 autoCorrect='off' ref={boardName} contentEditable autoComplete onKeyPress={(e) => handleBoardNameKeyPress(e, e.currentTarget.textContent)} >{board.name}</h2>
         {board.art ? <MasonryArt id={board._id} imageUrls={pictures} columnCount="4" /> : <Masonry id={board._id} imageUrls={pictures} columnCount="4" />}
 
-        <button onClick={() => setLinksPopup(true)} className='addButton'><img src={plus}></img></button>
+        <button onClick={() => {
+          setLinksPopup(true)
+          document.body.style.overflowY = "hidden"
+          }} className='addButton'><img src={plus}></img></button>
       </section>
 
     </>

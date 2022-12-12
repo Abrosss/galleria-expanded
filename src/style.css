@@ -282,6 +282,7 @@ img {
 
 .slideshow-container-center {
   width: 100%;
+  height: 100%;
   display: flex;
   gap: 25%;
   padding: 0 2rem;
@@ -296,6 +297,7 @@ img {
 .slideshow-container-center .image-container__image {
   width: 30rem;
   display: flex;
+  justify-content: center;
 }
 .slideshow-container-center .image-container__image img {
   -o-object-fit: cover;
@@ -484,7 +486,7 @@ img {
 }
 
 .modal {
-  width: 45rem;
+  width: 35rem;
   padding: 2rem;
   background-color: white;
   border-radius: 15px;
@@ -626,6 +628,10 @@ img {
   gap: 1rem;
   position: relative;
 }
+.cardContainer .boardName {
+  width: 15rem;
+  word-break: break-word;
+}
 .cardContainer .card {
   width: 18rem;
   height: 15rem;
@@ -662,7 +668,7 @@ img {
 .container {
   padding: 2.5rem;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   flex-wrap: wrap;
   gap: 2rem;
 }

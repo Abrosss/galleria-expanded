@@ -120,7 +120,7 @@ const OnCheckboxClick= (e) => {
               {boards && <Thumbnail thumbs={board.thumbnails} art={board.art} id={board._id}/>}
               </div>
             </section>
-            <span>{board.name}</span>
+            <span className='boardName'>{board.name}</span>
             </section>
           ))}
           
