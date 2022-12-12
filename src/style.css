@@ -734,6 +734,22 @@ img {
   }
 }
 @media (min-width: 250px) and (max-width: 768px) {
+  .progress-container {
+    gap: 0;
+  }
+  .controls {
+    gap: 1rem;
+  }
+  .controls .button {
+    width: 1.3rem;
+    height: 1.3rem;
+  }
+  .page {
+    height: 100%;
+  }
+  .changePerSlide span {
+    display: none;
+  }
   .masonry {
     -moz-columns: auto 1;
          columns: auto 1;
@@ -741,13 +757,15 @@ img {
   .container {
     justify-content: center;
   }
+  .slideshow {
+    padding: 1.5rem;
+  }
   .slideshow-container {
     justify-content: center;
     padding: 0;
     flex-direction: column;
     gap: 0rem;
     margin: 0;
-    padding: 1.5rem;
     padding-bottom: 4rem;
     overflow-x: hidden;
   }
@@ -824,7 +842,7 @@ img {
     height: 10%;
   }
   header a {
-    font-size: 0.5rem;
+    font-size: 0.7rem;
   }
   header img {
     width: 50%;

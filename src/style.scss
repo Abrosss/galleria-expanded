@@ -738,11 +738,32 @@ img {
   }
 
 @media (min-width: 250px) and (max-width: 768px) {
+    .progress-container {
+        gap: 0;
+    }
+    .controls {
+        gap: 1rem;
+        .button {
+            width: 1.3rem;
+            height: 1.3rem;
+        }
+    }
+    .page {
+        height: 100%;
+    }
+    .changePerSlide {
+        span {
+            display: none;
+        }
+    }
     .masonry {
         columns: auto 1;
     }
     .container {
         justify-content: center;
+    }
+    .slideshow {
+        padding: 1.5rem;
     }
     .slideshow-container {
         justify-content: center;
@@ -750,7 +771,7 @@ img {
         flex-direction: column;
         gap: 0rem;
         margin: 0;
-        padding: 1.5rem;
+        
         padding-bottom: 4rem;
         overflow-x: hidden;
 
@@ -851,7 +872,7 @@ img {
         height: 10%;
 
         a {
-            font-size: .5rem;
+            font-size: .7rem;
         }
 
         img {

@@ -163,11 +163,11 @@ function Slideshow() {
           </section>
           <div className='flex'>
             <section>
-              <div className='changePerSlide'>Change a slide every
+              <div className='changePerSlide'><span>Change a slide every</span>
                 <form onSubmit={(e) => sliderDuration(e, secondsInput.current.value)}>
                   <input ref={secondsInput} className='secondsPerSlide' placeholder={secondsPerSlide}></input>
                 </form>
-                seconds</div></section>
+                <span>seconds</span></div></section>
             <section className='controls'>
               <img className='button' onClick={() => action('previous')} src={back} alt="click previous"></img>
               {slideshow ? <img className='button' onClick={() => action('pause')} src={pause} alt="click play"></img> : <img className='button' onClick={() => action('play')} src={play} alt="click play"></img>}
