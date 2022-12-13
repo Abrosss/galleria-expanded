@@ -320,7 +320,7 @@ console.log(editedArt)
                  </form>
          
          <div className='buttons'>
-           <button onClick={(e) => editArt(e, editPopup._id)}>Submit</button>
+           <button onClick={(e) => editArt(e, editPopup._id)}>Edit</button>
          </div>
 
        </section>
