@@ -803,7 +803,7 @@ img {
     justify-content: center;
   }
   .slideshow-container-center .image-container .image-container__image {
-    min-width: none;
+    min-width: unset;
     max-width: 20rem;
   }
   .progress-container {

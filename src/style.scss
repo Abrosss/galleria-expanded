@@ -811,7 +811,7 @@ img {
         .image-container {
             justify-content: center;
             .image-container__image {
-                min-width: none;
+                min-width: unset;
                 max-width: 20rem;
             }
           }
