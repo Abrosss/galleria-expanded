@@ -3,7 +3,7 @@ import axios from '../api/axios';
 import { useState, useEffect } from 'react';
 function Thumbnail({thumbs, id, art}) {
     const [pictures, setPictures] = useState([])
-console.log(id)
+
     useEffect(() => {
       if(art) {
         axios.get(`/art/${id}`).then((response) => {
@@ -23,7 +23,7 @@ console.log(id)
       }
        
       }, []);
-      console.log(pictures)
+ 
   return (
     <>
     {thumbs && thumbs.map(pic => (

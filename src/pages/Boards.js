@@ -20,11 +20,11 @@ function Home() {
   const [artCollection, setArtCollection] = useState(false)
   const [hovered, setHovered] = useState(null)
   const [settingsPopup, setSettingsPopup] = useState(null)
-
+console.log(editPopup)
   useEffect(() => {
 
     axios.get('/boards').then((response) => {
-      console.log(response.data)
+   
       setBoards(response.data);
     });
   }, []);
@@ -61,16 +61,16 @@ function Home() {
     })
       .catch(err => console.log(err))
   }
-  console.log(boards)
+
   async function deleteBoard(id) {
-    console.log(id)
+  
     try {
 
       const updatedBoards = boards.filter(board => board._id !== id);
       await axios.delete(`/boards/${id}`)
         .then(res => {
           if (res.status === 200) {
-            console.log(res)
+     
             setBoards(updatedBoards)
           }
         })
@@ -135,20 +135,9 @@ function Home() {
           <form onSubmit={(e) => editBoard(e, editPopup._id)} className='modal'>
             <h2>Edit the board</h2>
             <label htmlFor='boardName'>Name</label>
-            <input autoFocus onChange={(e) => setName(e.target.value)} autoComplete='off' id='boardName' type="text" placeholder={editPopup.name}></input>
-            <div className='checklist'>
-              <label class="wrapper">
-                {editPopup.art ?
-                  <input onClick={(e) => OnCheckboxClick(e)} checked type="checkbox" id="checkbox" /> :
-                  <input onClick={(e) => OnCheckboxClick(e)} type="checkbox" id="checkbox" />
-                }
-
-                <span class="left"></span>
-                <span class="right"></span>
-              </label>
-              <span className={editPopup.art ? 'selected' : ''}>art collection</span>
-            </div>
-            <button>Create</button>
+            <input autoFocus onChange={(e) => setName(e.target.value)} value={!name ? editPopup.name : name} autoComplete='off' id='boardName' type="text" placeholder={editPopup.name}></input>
+           
+            <button>Edit</button>
           </form>
         </section>
       }
@@ -156,7 +145,11 @@ function Home() {
         <Header page={'boards'} />
         <section className='container'>
           {boards && boards.map((board, index) => (
-            <section onMouseEnter={() => setHovered(index)} onMouseLeave={() => setHovered(null)} key={index} className='cardContainer'>
+            <section onMouseEnter={() => setHovered(index)} onMouseLeave={() => {
+              
+              setHovered(null)
+              setSettingsPopup(null)
+              }} key={index} className='cardContainer'>
               {/* <div data-id={board._id} onClick={() => deleteBoard(board._id)} className={hovered === index ? 'trash show' : 'trash'}><img data-id={board._id}  src={dots}></img></div>  */}
               <div data-id={board._id} onClick={() => setSettingsPopup(prev => prev === null ? index : null
               )} className={hovered === index ? 'trash show' : 'trash'}><img data-id={board._id} src={dots}></img>
