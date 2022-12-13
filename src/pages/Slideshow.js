@@ -140,7 +140,7 @@ function Slideshow() {
 
   return (
     <>
-      <section className='page'>
+      <section className={loaded && board.art ? 'page' : 'page single' }>
 
         <header>
           <Link to='/profile'><img src={logo} alt="logo"></img></Link>

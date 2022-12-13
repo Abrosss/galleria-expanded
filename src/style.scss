@@ -831,6 +831,9 @@ img {
     .page {
         height: 100%;
     }
+    .page.single {
+        height: 100vh; 
+    }
     .changePerSlide {
         span {
             display: none;
