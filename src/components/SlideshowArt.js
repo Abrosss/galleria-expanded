@@ -20,7 +20,7 @@ function SlideshowArt({ art, setSlideshow }) {
                 <section className='slideshow-container '>
                     <section className='image-container'>
                         <div className="image-container__image">
-                            <img src={art.img.image} alt="art"   ></img>
+                            <img src={art?.img?.image} alt="art"   ></img>
                             <div onClick={() => viewImage(art.img, art.i)} className='view-image'>
                                 <div><img src={view} alt="art"></img></div>
                                 <span>VIEW IMAGE</span>
@@ -29,12 +29,12 @@ function SlideshowArt({ art, setSlideshow }) {
                         </div>
                         <div className='image-container__caption'>
                             <div className='text'>
-                                <h2>{art.img.title && art.img.title}</h2>
-                                <p>{art.img.artist && art.img.artist.name}</p>
+                                <h2>{art?.img?.title}</h2>
+                                <p>{art?.img?.artist?.name}</p>
                             </div>
-                            {art.img.artist.image &&
+                            {art?.img?.artist?.image &&
                                 <div className='artist'>
-                                    <img src={art.img.artist.image} alt="artist"></img>
+                                    <img src={art?.img?.artist?.image} alt="artist"></img>
                                 </div>
                             }
 

@@ -45,7 +45,7 @@ function Slideshow() {
   useEffect(() => {
     setLoaded(false)
     axios.get(`/boards/${art.img.board}`).then((response) => {
-      console.log(response.data[0])
+     
       setBoard(response.data[0]);
       setLoaded(true)
     });
@@ -159,7 +159,7 @@ function Slideshow() {
           </div>
           <section className='slide-name'>
             <h4>{art.img.title}</h4>
-            <p>{art.img.artist.name}</p>
+            <p>{art.img.artist && art.img.artist.name}</p>
           </section>
           <div className='flex'>
             <section>
