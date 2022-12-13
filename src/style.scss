@@ -807,8 +807,19 @@ img {
   }
 
 @media (min-width: 250px) and (max-width: 768px) {
+    .slideshow-container-center {
+        .image-container {
+            justify-content: center;
+            .image-container__image {
+                min-width: none;
+                max-width: 20rem;
+            }
+          }
+      }
     .progress-container {
         gap: 0;
+        position: fixed;
+        bottom: 0;
     }
     .controls {
         gap: 1rem;
