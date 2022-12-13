@@ -3,11 +3,13 @@
 import {useNavigate} from 'react-router-dom';
 import trash from '../shared/trash.svg'
 import axios from '../api/axios';
+import dots from '../shared/dots.svg'
 import { useState, useEffect } from 'react';
 function MasonryArt(props) {
   const [pics, setPics] = useState(props.imageUrls)
   const [hovered, setHovered] = useState(null)
   const [thumbnails, setThumbnails] = useState([])
+  const [settingsPopup, setSettingsPopup] = useState(null)
   console.log(thumbnails)
   useEffect(() => {
     setPics(props.imageUrls);
@@ -54,8 +56,8 @@ useEffect(() => {
 }
   const navigate = useNavigate();
   const viewImage = (img, i, e) => {
-    console.log(i)
-    if(!e.target.dataset.id) {
+    console.log(e.target.tagName)
+    if(!e.target.dataset.id && e.target.tagName !== 'LI') {
       navigate('/slideshow',{state: {
         art:{img, i},
         slide:false
@@ -64,16 +66,25 @@ useEffect(() => {
     
 
   }
+ 
   
   return (
     <>
-    
+
     <div className='masonry'>
     {pics.map((img, i) => (
       <div  onClick={(e) => viewImage(img, i, e)} key={i} className="image">
          
         <div onMouseEnter={() => setHovered(i)} onMouseLeave={() => setHovered(null)} className='image-container'>
-        <div data-id={img._id} onClick={() => deleteBoard(img._id, img.board)} className={hovered === i ? 'trash show' : 'trash'}><img data-id={img._id}  src={trash}></img></div> 
+       
+        <div data-id={img._id} onClick={() => setSettingsPopup(prev => prev === null ? i : null
+              )} className={hovered === i ? 'settings show' : 'settings'}><img data-id={img._id} src={dots}></img>
+                <ul className={settingsPopup === i ? ' settingsPopup show' : 'settingsPopup'}>
+                  <li onClick={() => props.setEditPopup(img)}>Edit</li>
+                  <li onClick={() => deleteBoard(img._id, img.board)}>Delete</li>
+                </ul>
+
+              </div>
       <img className='img dimmed' src={img.image} alt="thumbnail"   ></img>
       <div className='caption'>
         <h2>{img.title}</h2>

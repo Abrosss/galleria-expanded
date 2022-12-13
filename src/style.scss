@@ -217,7 +217,6 @@ img {
     right: 2%;
     top: 2%;
     z-index: 250;
-    background-color: #F5F5F5;
     justify-content: center;
     align-items: center;
     border-radius: 50%;
@@ -229,6 +228,28 @@ img {
     }
 }
 .trash.show {
+    display: flex;
+}
+.settings {
+    display: none;
+    width: 2rem;
+    height: 2rem;
+    position: absolute;
+    right: 2%;
+    top: 2%;
+    z-index: 2;
+    background-color: #F5F5F5;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    cursor: pointer;
+    img {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: cover;
+    }
+}
+.settings.show {
     display: flex;
 }
 .slideshow {
@@ -618,7 +639,7 @@ img {
     padding-top: 1rem;
     h2 {
         font-size: 1.8rem;
-        text-align: center;
+       
     }
 }
 .addButtonContainer {
@@ -660,7 +681,7 @@ img {
     align-items: center;
     gap:1rem;
     position: relative;
-    .settings {
+    .settingsPopup {
         background-color: white;
         
         
@@ -678,7 +699,7 @@ img {
             background-color: #7D7D7D;
         }
     }
-    .settings.show {
+    .settingsPopup.show {
         display: flex;
     }
     .boardName {
@@ -720,7 +741,29 @@ img {
         font-weight: bold;
     }
 }
-
+.image-container {
+    .settingsPopup {
+        background-color: white;
+        
+        
+        position: absolute;
+        right: 0;
+        top: 3rem;
+        z-index: 10;
+        display: none;
+        flex-direction: column;
+    
+        li{
+            padding: 1rem 2rem;
+        }
+        li:hover {
+            background-color: #7D7D7D;
+        }
+    }
+    .settingsPopup.show {
+        display: flex;
+    }
+}
 .container {
     padding: 2.5rem;
     display: flex;

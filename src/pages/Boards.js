@@ -152,8 +152,8 @@ console.log(editPopup)
               }} key={index} className='cardContainer'>
               {/* <div data-id={board._id} onClick={() => deleteBoard(board._id)} className={hovered === index ? 'trash show' : 'trash'}><img data-id={board._id}  src={dots}></img></div>  */}
               <div data-id={board._id} onClick={() => setSettingsPopup(prev => prev === null ? index : null
-              )} className={hovered === index ? 'trash show' : 'trash'}><img data-id={board._id} src={dots}></img>
-                <ul className={settingsPopup === index ? ' settings show' : 'settings'}>
+              )} className={hovered === index ? 'settings show' : 'settings'}><img data-id={board._id} src={dots}></img>
+                <ul className={settingsPopup === index ? ' settingsPopup show' : 'settingsPopup'}>
                   <li onClick={() => setEditPopup(board)}>Edit</li>
                   <li onClick={() => deleteBoard(board._id)}>Delete</li>
                 </ul>

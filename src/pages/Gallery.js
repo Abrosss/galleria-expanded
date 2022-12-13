@@ -15,13 +15,14 @@ function Home() {
 
   const [board, setBoard] = useState([])
   const [pictures, setPictures] = useState([])
+  const [editPopup, setEditPopup] = useState(null)
   const [art, setArt] = useState([])
   const [updatePictures, setUpdatePictures] = useState(false)
   const [linksPopup, setLinksPopup] = useState(false)
   const [inputList, setInputList] = useState([{}]);
   const [error, setError] = useState(null)
   const [active, setActive] = useState(0)
-
+  const [editedArt, setEditedArt] = useState({})
   const navigate = useNavigate();
   const toggleActive = (i) => {
     if (active === i)
@@ -29,7 +30,7 @@ function Home() {
     setActive(i)
 
   }
-
+console.log(editedArt)
   const viewImage = (i) => {
 
     let img = pictures[0]
@@ -82,6 +83,7 @@ function Home() {
   const closeImage = (e) => {
     if (e.target.className === "overlay") {
       if (linksPopup) setLinksPopup(false)
+      if( editPopup) setEditPopup(null)
       document.body.style.overflowY = "unset";
     }
 
@@ -111,7 +113,12 @@ function Home() {
     list[index][name] = value;
 
   };
+  const handleInputChangeEditArt = (e) => {
+    const { name, value } = e.target;
+  
+    editedArt[name] = value;
 
+  };
   async function addPictures(e) {
 
     e.preventDefault()
@@ -181,7 +188,34 @@ function Home() {
 
     }
   }
+  console.log(editPopup)
+  function editArt(e, id) {
+    console.log(editedArt)
+    let artist = {
+      name: editedArt.artist,
+      image: editedArt.artistlink
+    }
+    let updatedArt= {...editedArt, artist}
+    e.preventDefault()
+    axios.put(`/art/${id}`, {
+      updatedArt: updatedArt
 
+    }).then(res => {
+      if (res.status === 200) {
+        console.log(res.data)
+        setPictures(pictures.map(pic => pic._id === id ? res.data : pic));
+        setEditPopup(null)
+      }
+
+    })
+    
+    
+    .catch(err => console.log(err))
+  }
+  const inputProps = {
+    autoComplete: 'off',
+    onChange: e => handleInputChangeEditArt(e),
+  };
   return (
     <>
       {linksPopup &&
@@ -256,13 +290,49 @@ function Home() {
           </section>
         </section>
       }
+           {editPopup &&
+       <section onClick={closeImage} className='overlay'>
+       <section className='modal'>
+         <h2>Edit a picture</h2>
+         <form >
+                   <input {...inputProps} autoFocus required id='title' className='input' type="text" placeholder="Title" name="title" defaultValue={editPopup.title} />
+                   <input {...inputProps} required id='link' className='input' type="text" placeholder="Image link" name="image" defaultValue={editPopup.image}  />
+                   <textarea {...inputProps} maxLength="840" id='description' className='input' type="text" placeholder="Description" defaultValue={editPopup.description} name="description"></textarea>
+
+                   <div className='flex'>
+                     <>
+
+                       <input {...inputProps} required id='artist' className='input' type="text" placeholder="Artist name" defaultValue={editPopup.artist.name}   name="artist" />
+                     </>
+                     <div>
+
+                       <input {...inputProps} required id='year' defaultValue={editPopup.year}  className='input' type="text" placeholder="Year" name="year" />
+
+                     </div>
+                   </div>
+
+                   <input {...inputProps} id='artistlink' defaultValue={editPopup.artist.link}  className='input' type="text" placeholder="Artist image link (optional)" name="artistlink" />
+
+                   <input {...inputProps} id='source' className='input' type="text" placeholder="Source link (wiki)" name="wiki" />
+
+
+
+                 </form>
+         
+         <div className='buttons'>
+           <button onClick={(e) => editArt(e, editPopup._id)}>Submit</button>
+         </div>
+
+       </section>
+     </section>
+      }
       <header>
         <Link to='/profile'><img src={logo} alt="logo"></img></Link>
         <a onClick={() => viewImage(0)} href='/slideshow'>START SLIDESHOW</a>
       </header>
       <section className='board-pins'>
         <h2 autoCorrect='off' ref={boardName} contentEditable autoComplete onKeyPress={(e) => handleBoardNameKeyPress(e, e.currentTarget.textContent)} >{board.name}</h2>
-        {board.art ? <MasonryArt id={board._id} imageUrls={pictures} columnCount="4" /> : <Masonry id={board._id} imageUrls={pictures} columnCount="4" />}
+        {board.art ? <MasonryArt setEditPopup={setEditPopup} id={board._id} imageUrls={pictures} columnCount="4" /> : <Masonry id={board._id} imageUrls={pictures} columnCount="4" />}
         <div className='addButtonContainer'>
         <button onClick={() => {
           setLinksPopup(true)
