@@ -221,7 +221,7 @@ console.log(editedArt)
       {linksPopup &&
         <section onClick={closeImage} className='overlay'>
           <section className='modal'>
-            <h2>Add links</h2>
+            <h2>Add images</h2>
             <ul className="links">
               {inputList && inputList.map((list, i) => {
                 const inputProps = {
@@ -236,7 +236,7 @@ console.log(editedArt)
               })}
             </ul>
             {error && <span>{error}</span>}
-            <button onClick={handleAddClick}>Add</button>
+            <button className='addMoreLinks' onClick={handleAddClick}>Add more images</button>
             <button onClick={addPictures}>Submit</button>
           </section>
         </section>
@@ -244,7 +244,7 @@ console.log(editedArt)
       {linksPopup && board.art &&
         <section onClick={closeImage} className='overlay'>
           <section className='modal'>
-            <h2>Add a picture</h2>
+            <h2>Add images</h2>
             <ul className="links">
               {inputList && inputList.map((list, i) => {
                 const inputProps = {
@@ -253,9 +253,9 @@ console.log(editedArt)
                 };
                 return (
                   <li key={i}>
-                    <h1 onClick={() => toggleActive(i)}><span>{i + 1}.</span><span className='title'>{list.title}</span></h1>
+                    <h1><span onClick={() => toggleActive(i)}>{i + 1}.</span><input {...inputProps} autoFocus required id='title' className='input' type="text" placeholder="Title" name="title" /></h1>
                     <form className={i === active ? "show" : ""}>
-                      <input {...inputProps} autoFocus required id='title' className='input' type="text" placeholder="Title" name="title" />
+                      
                       <input {...inputProps} required id='link' className='input' type="text" placeholder="Image link" name="link" />
                       <textarea {...inputProps} maxLength="840" id='description' className='input' type="text" placeholder="Description" name="description"></textarea>
 
@@ -283,7 +283,7 @@ console.log(editedArt)
               })}
             </ul>
             <div className='buttons'>
-              <button onClick={handleAddMoreClick}>Add more</button>
+              <button className='addMoreLinks' onClick={handleAddMoreClick}>Add more images</button>
               <button onClick={addArt}>Submit</button>
             </div>
 
