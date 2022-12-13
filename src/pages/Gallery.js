@@ -302,7 +302,7 @@ console.log(editedArt)
                    <div className='flex'>
                      <>
 
-                       <input {...inputProps} required id='artist' className='input' type="text" placeholder="Artist name" defaultValue={editPopup.artist.name}   name="artist" />
+                       <input {...inputProps} required id='artist' className='input' type="text" placeholder="Artist name" defaultValue={editPopup.artist && editPopup.artist.name}   name="artist" />
                      </>
                      <div>
 
@@ -311,7 +311,7 @@ console.log(editedArt)
                      </div>
                    </div>
 
-                   <input {...inputProps} id='artistlink' defaultValue={editPopup.artist.link}  className='input' type="text" placeholder="Artist image link (optional)" name="artistlink" />
+                   <input {...inputProps} id='artistlink' defaultValue={editPopup.artist && editPopup.artist.link}  className='input' type="text" placeholder="Artist image link (optional)" name="artistlink" />
 
                    <input {...inputProps} id='source' className='input' type="text" placeholder="Source link (wiki)" name="wiki" />
 
