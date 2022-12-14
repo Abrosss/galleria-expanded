@@ -144,7 +144,7 @@ function Slideshow() {
 
         <header>
           <Link to='/profile'><img src={logo} alt="logo"></img></Link>
-          <a onClick={slide} href='/slideshow'>START SLIDESHOW</a>
+         {pictures.length >1 && <a onClick={slide} href='/slideshow'>START SLIDESHOW</a> } 
         </header>
         {loaded && !board.art && <SlideshowSinglePics art={art} />}
         {loaded && board.art && <SlideshowArt art={art} setSlideshow={setSlideshow} />}

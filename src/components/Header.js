@@ -27,6 +27,7 @@ console.log(user)
   const handleLogout = () => {
     localStorage.removeItem('auth')
     setUser(null)
+    navigate('/')
   }
   const onSuccess = (response) => {
 
