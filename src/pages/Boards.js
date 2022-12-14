@@ -1,32 +1,39 @@
 import { useEffect, useState } from 'react';
 import Header from '../components/Header';
 import plus from '../shared/plus.svg'
-import trash from '../shared/trash.svg'
 import dots from '../shared/dots.svg'
 import axios from '../api/axios'
 import { useNavigate } from 'react-router-dom';
 import Thumbnail from '../components/Thumbnail';
-import { v4 as uuidv4 } from 'uuid';
 function Home() {
   const navigate = useNavigate()
-  const [popup, setPopup] = useState(false)
-  const [editPopup, setEditPopup] = useState(null)
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem('auth')))
-  // const [linksPopup, setLinksPopup] = useState(false)
-  const [name, setName] = useState(null)
-  const [boards, setBoards] = useState([])
-  const [currentBoard, setCurrentBoard] = useState({})
-  const [currentIndex, setCurrentIndex] = useState(null)
-  const [inputList, setInputList] = useState([{ link: "" }]);
-  const [artCollection, setArtCollection] = useState(false)
-  const [hovered, setHovered] = useState(null)
-  const [settingsPopup, setSettingsPopup] = useState(null)
+  
+    // Create an object to store all the different pieces of state
+    const [state, setState] = useState({
+      popup: false,
+      editPopup: null,
+      user: JSON.parse(localStorage.getItem('auth')),
+      name: null,
+      boards: [],
+      artCollection: false,
+      hovered: null,
+      settingsPopup: null,
+    })
+  
+    // Use destructuring to extract the different pieces of state
+    const { popup, editPopup, user, name, boards, artCollection, hovered, settingsPopup } = state
+  
+ 
 
   useEffect(() => {
    
       axios.get(`/allboards/${user._id}`).then((response) => {
    
-        setBoards(response.data);
+        setState(prevState => ({
+          ...prevState,
+          boards: response.data,
+   
+        }))
       });
     
 
@@ -36,8 +43,11 @@ function Home() {
 
   const closeImage = (e) => {
     if (e.target.className === "overlay") {
-      setPopup(false)
-      setEditPopup(null)
+      setState({
+        ...state,  
+        popup: false,  
+        editPopup: null,  
+      })
       document.body.style.overflowY = "unset";
     }
 
@@ -45,7 +55,11 @@ function Home() {
 
   function addBoard(e) {
     e.preventDefault()
-    setPopup(false)
+    setState({
+      ...state,  
+      popup: false,  
+   
+    })
 
     axios.post('/addBoard', {
       name: name,
@@ -53,8 +67,11 @@ function Home() {
       user: user._id
     }).then(res => {
       if (res.status === 200) {
-        setBoards([...boards, res.data]);
-        setCurrentIndex(res.data)
+        
+        setState({
+          ...state,
+          boards: [...boards, res.data],
+        });
         navigate(`/profile/${res.data}`, {
           state: {
             id: res.data,
@@ -77,7 +94,10 @@ function Home() {
         .then(res => {
           if (res.status === 200) {
      
-            setBoards(updatedBoards)
+            setState({
+              ...state,
+              boards: updatedBoards,
+            });
           }
         })
         .catch(err => console.log(err))
@@ -90,10 +110,18 @@ function Home() {
   }
   const OnCheckboxClick = (e) => {
     if (e.target.checked) {
-      setArtCollection(true)
+      setState({
+        ...state,
+        artCollection: true,
+      });
+    
     }
     else {
-      setArtCollection(false)
+      setState({
+        ...state,
+        artCollection: false,
+      });
+     
     }
   }
   function editBoard(e, id) {
@@ -105,8 +133,11 @@ function Home() {
     }).then(res => {
       if (res.status === 200) {
  
-        setBoards(boards.map(board => board._id === id ? res.data : board));
-        setEditPopup(null)
+        setState({
+          ...state,
+          boards: boards.map(board => board._id === id ? res.data : board),  // update the relevant board in the boards array
+          editPopup: null,  // update the editPopup value
+        });
       }
 
     })
@@ -123,7 +154,10 @@ function Home() {
           <form onSubmit={addBoard} className='modal'>
             <h2>Create a board</h2>
             <label htmlFor='boardName'>Name</label>
-            <input autoFocus onChange={(e) => setName(e.target.value)} autoComplete='off' id='boardName' type="text" placeholder='Board name'></input>
+            <input autoFocus onChange={(e) => setState({
+  ...state,
+  name: e.target.value
+})} autoComplete='off' id='boardName' type="text" placeholder='Board name'></input>
             <div className='checklist'>
               <label class="wrapper">
                 <input onClick={(e) => OnCheckboxClick(e)} type="checkbox" id="checkbox" />
@@ -141,7 +175,10 @@ function Home() {
           <form onSubmit={(e) => editBoard(e, editPopup._id)} className='modal'>
             <h2>Edit the board</h2>
             <label htmlFor='boardName'>Name</label>
-            <input autoFocus onChange={(e) => setName(e.target.value)} value={!name ? editPopup.name : name} autoComplete='off' id='boardName' type="text" placeholder={editPopup.name}></input>
+            <input autoFocus onChange={(e) => setState({
+  ...state,
+  name: e.target.value
+})} value={!name ? editPopup.name : name} autoComplete='off' id='boardName' type="text" placeholder={editPopup.name}></input>
            
             <button>Edit</button>
           </form>
@@ -151,17 +188,29 @@ function Home() {
         <Header page={'boards'} />
         <section className='container'>
           {boards && boards.map((board, index) => (
-            <section onMouseEnter={() => setHovered(index)} onMouseLeave={() => {
-              
-              setHovered(null)
-              setSettingsPopup(null)
+            <section onMouseEnter={() =>    setState({
+              ...state,
+              hovered: index,
+            })} onMouseLeave={() => {
+              setState({
+                ...state,
+                hovered: null,
+                settingsPopup: null
+              })
+           
               }} key={index} className='cardContainer'>
-              {/* <div data-id={board._id} onClick={() => deleteBoard(board._id)} className={hovered === index ? 'trash show' : 'trash'}><img data-id={board._id}  src={dots}></img></div>  */}
+              
               {user && 
-              <div data-id={board._id} onClick={() => setSettingsPopup(prev => prev === null ? index : null
-                )} className={hovered === index ? 'settings show' : 'settings'}><img data-id={board._id} src={dots}></img>
+              <div data-id={board._id} onClick={() => setState({
+                ...state,
+                settingsPopup: settingsPopup === null ? index : null,  // update the settingsPopup value
+              })} className={hovered === index ? 'settings show' : 'settings'}><img data-id={board._id} src={dots}></img>
                   <ul className={settingsPopup === index ? ' settingsPopup show' : 'settingsPopup'}>
-                    <li onClick={() => setEditPopup(board)}>Edit</li>
+                    <li onClick={() => setState({
+                ...state,
+                editPopup: board,
+             
+              }) }>Edit</li>
                     <li onClick={() => deleteBoard(board._id)}>Delete</li>
                   </ul>
   
@@ -184,7 +233,11 @@ function Home() {
           ))}
           {user && 
           <div className='addButtonContainer'>
-          <button onClick={() => setPopup(true)} title='Create a board' className='addButton'>
+          <button onClick={() => setState({
+                ...state,
+                popup: true,
+        
+              }) } title='Create a board' className='addButton'>
             <img src={plus}></img>
           </button>
         </div>

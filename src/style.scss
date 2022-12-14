@@ -854,6 +854,12 @@ img {
   }
 
 @media (min-width: 250px) and (max-width: 768px) {
+    .trash  {
+        display: flex;
+    }
+    .settings {
+        display: flex;
+    }
     .slideshow-container-center {
         .image-container {
             justify-content: center;

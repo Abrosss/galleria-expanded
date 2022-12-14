@@ -1,7 +1,6 @@
 
 import './style.css';
 
-import Home from './pages/Home';
 import Slideshow from './pages/Slideshow';
 import Boards from './pages/Boards'
 import Gallery from './pages/Gallery'
