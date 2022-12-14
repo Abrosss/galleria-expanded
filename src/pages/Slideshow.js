@@ -144,7 +144,7 @@ function Slideshow() {
 
         <header>
           <Link to='/profile'><img src={logo} alt="logo"></img></Link>
-         {pictures.length >1 && <a onClick={slide} href='/slideshow'>START SLIDESHOW</a> } 
+         {pictures?.length >1 && <a onClick={slide} href='/slideshow'>START SLIDESHOW</a> } 
         </header>
         {loaded && !board.art && <SlideshowSinglePics art={art} />}
         {loaded && board.art && <SlideshowArt art={art} setSlideshow={setSlideshow} />}
@@ -153,7 +153,7 @@ function Slideshow() {
 
 
 
-        {loaded && board.art && <section className='progress-container '>
+        {loaded && board.art && pictures?.length > 1 && <section className='progress-container '>
           <div class="progress">
             <div style={{ flexBasis: progress + "%" }} class="progress__filled"></div>
           </div>
@@ -176,7 +176,7 @@ function Slideshow() {
             </section>
           </div>
         </section>}
-        {loaded && !board.art &&
+        {loaded && !board.art && pictures?.length > 1 &&
 
           <section className='progress-container center'>
             <div class="progress">
