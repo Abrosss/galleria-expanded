@@ -1,14 +1,13 @@
 import { useEffect, useRef, useState } from 'react';
 
-import Masonry from '../components/Masonry2';
-import MasonryArt from '../components/MasonryArt'
+import Masonry from '../components/Masonry';
 import { useLocation } from 'react-router-dom';
 import { Link, useNavigate } from 'react-router-dom'
 
 import logo from '../shared/logo.svg';
 import plus from '../shared/plus.svg'
 import axios from '../api/axios'
-function Home() {
+function Gallery() {
 
 
   const location = useLocation();
@@ -25,14 +24,14 @@ function Home() {
   const [active, setActive] = useState(0)
   const [editedArt, setEditedArt] = useState({})
   const navigate = useNavigate();
-  console.log(board)
+
   const toggleActive = (i) => {
     if (active === i)
       return setActive(null)
     setActive(i)
 
   }
-console.log(editedArt)
+
   const viewImage = (i) => {
 
     let img = pictures[0]
@@ -69,11 +68,6 @@ console.log(editedArt)
   useEffect(() => {
     fetchData(location.state.id, location.state.art).then(data => {
       setPictures(data);
-      const existingItems = JSON.parse(localStorage.getItem('pictures')) || [];
-      // Filter out any items that already exist in local storage
-      const newItems = data.filter(item => !existingItems.includes(item));
-      // Save the new items to local storage
-      localStorage.setItem('pictures', JSON.stringify(newItems));
     });
   }, [updatePictures]);
 
@@ -145,7 +139,7 @@ console.log(editedArt)
    
 
   }
-  console.log(pictures)
+
   async function addArt(e) {
 
     e.preventDefault()
@@ -157,7 +151,7 @@ console.log(editedArt)
         board: location.state.id,
       });
       if (response.status === 200) {
-        console.log(inputList, pictures)
+     
         updateState(response.data, inputList, 'art');
       }
 
@@ -176,7 +170,7 @@ console.log(editedArt)
     }, 100);
     if (stateVar === 'pictures') {
       const newPictures = [...pictures, ...inputList.link]
-      console.log(newPictures)
+   
       setPictures(newPictures);
     } else if (stateVar === 'art') {
       setArt([...art, ...inputList]);
@@ -197,9 +191,9 @@ console.log(editedArt)
 
     }
   }
-  console.log(editPopup)
+
   function editArt(e, id) {
-    console.log(editedArt)
+
     let artist = {
       name: editedArt.artist,
       image: editedArt.artistlink
@@ -211,7 +205,7 @@ console.log(editedArt)
 
     }).then(res => {
       if (res.status === 200) {
-        console.log(res.data)
+        
         setPictures(pictures.map(pic => pic._id === id ? res.data : pic));
         setEditPopup(null)
       }
@@ -341,7 +335,7 @@ console.log(editedArt)
       </header>
       <section className='board-pins'>
         <h2 autoCorrect='off' ref={boardName} contentEditable autoComplete onKeyPress={(e) => handleBoardNameKeyPress(e, e.currentTarget.textContent)} >{board.name}</h2>
-        {board.art ? <MasonryArt setEditPopup={setEditPopup} id={board._id} imageUrls={pictures} columnCount="4" /> : <Masonry id={board._id} imageUrls={pictures} columnCount="4" />}
+        <Masonry setEditPopup={setEditPopup} art={board.art} id={board._id} imageUrls={pictures} columnCount="4" />
        {user && 
         <div className='addButtonContainer'>
         <button onClick={() => {
@@ -356,4 +350,4 @@ console.log(editedArt)
   )
 }
 
-export default Home
+export default Gallery
