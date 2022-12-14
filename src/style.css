@@ -19,6 +19,17 @@ p {
   color: #7D7D7D;
 }
 
+.signup .google-auth-button .S9gUrf-YoZ4jf, .S9gUrf-YoZ4jf * {
+  font-size: 0.8rem;
+  text-decoration: none;
+  color: #7D7D7D;
+  letter-spacing: 2px !important;
+  cursor: pointer;
+}
+.signup .google-auth-button .S9gUrf-YoZ4jf:hover, .S9gUrf-YoZ4jf *:hover {
+  color: black;
+}
+
 header {
   font-weight: 700;
   display: flex;

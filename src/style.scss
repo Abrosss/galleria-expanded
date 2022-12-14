@@ -20,7 +20,17 @@ li {
 p {
     color: $gray;
 }
+.signup .google-auth-button .S9gUrf-YoZ4jf, .S9gUrf-YoZ4jf *{
+    font-size: .8rem;
+    text-decoration: none;
+    color: $gray;
+    letter-spacing: 2px !important;
+    cursor: pointer;
 
+    &:hover {
+        color: black;
+    }
+}
 header {
     font-weight: 700;
     display: flex;

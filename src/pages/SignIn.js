@@ -20,6 +20,8 @@ function SignIn() {
   const auth = localStorage.getItem('auth');
 
   const onSuccess = (response) => {
+
+ console.log(response)
     // The response object is passed as an argument to the onSuccess function.
     // You can access it using the "response" argument.
  

@@ -14,7 +14,7 @@ function Home() {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('auth')))
   // const [linksPopup, setLinksPopup] = useState(false)
   const [name, setName] = useState(null)
-  const [boards, setBoards] = useState([])
+  const [boards, setBoards] = useState(JSON.parse(localStorage.getItem('boards')) || [])
   const [currentBoard, setCurrentBoard] = useState({})
   const [currentIndex, setCurrentIndex] = useState(null)
   const [inputList, setInputList] = useState([{ link: "" }]);
@@ -23,15 +23,14 @@ function Home() {
   const [settingsPopup, setSettingsPopup] = useState(null)
 
   useEffect(() => {
-   
-      axios.get(`/allboards/${user._id}`).then((response) => {
+  
+      axios.get('/allBoards/6399d3c069d7646c73e3159c').then((response) => {
    
         setBoards(response.data);
       });
     
-
    
-  }, [user]);
+  }, []);
 
 
   const closeImage = (e) => {
