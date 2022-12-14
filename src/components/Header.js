@@ -49,7 +49,7 @@ console.log(user)
    
      const handleGoogle = (user) => {
        setIsLoading(true)
-       Axios.post("http://localhost:5000/google-signup", {
+       Axios.post("https://galleria-one.vercel.app/google-signup", {
    
          email: user.email,
          username: user.email.slice(0, user.email.indexOf("@")),
