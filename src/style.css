@@ -969,10 +969,10 @@ img {
     height: 10%;
   }
   header a {
-    font-size: 0.7rem;
+    font-size: 0.8rem;
   }
   header img {
-    width: 50%;
+    width: 80%;
   }
 }
 @media (min-width: 769px) and (max-width: 1000px) {
