@@ -11,22 +11,32 @@ function Home() {
   const navigate = useNavigate()
   const [popup, setPopup] = useState(false)
   const [editPopup, setEditPopup] = useState(null)
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem('auth')))
   // const [linksPopup, setLinksPopup] = useState(false)
   const [name, setName] = useState(null)
-  const [boards, setBoards] = useState([])
+  const [boards, setBoards] = useState(JSON.parse(localStorage.getItem('boards')) || [])
   const [currentBoard, setCurrentBoard] = useState({})
   const [currentIndex, setCurrentIndex] = useState(null)
   const [inputList, setInputList] = useState([{ link: "" }]);
   const [artCollection, setArtCollection] = useState(false)
   const [hovered, setHovered] = useState(null)
   const [settingsPopup, setSettingsPopup] = useState(null)
-console.log(editPopup)
-  useEffect(() => {
 
-    axios.get('/boards').then((response) => {
+  useEffect(() => {
+    if(user !== null) {
+      axios.get(`/allboards/${user._id}`).then((response) => {
    
-      setBoards(response.data);
-    });
+        setBoards(response.data);
+      });
+    }
+
+    if(user === null) {
+      axios.get('/boards/').then((response) => {
+   
+        setBoards(response.data);
+      });
+    }
+   
   }, []);
 
 
@@ -45,7 +55,8 @@ console.log(editPopup)
 
     axios.post('/addBoard', {
       name: name,
-      art: artCollection
+      art: artCollection,
+      user: user._id
     }).then(res => {
       if (res.status === 200) {
         setBoards([...boards, res.data]);
@@ -56,6 +67,7 @@ console.log(editPopup)
             art: artCollection
           }
         });
+        localStorage.setItem('boards', JSON.stringify(boards));
       }
 
     })
@@ -151,14 +163,17 @@ console.log(editPopup)
               setSettingsPopup(null)
               }} key={index} className='cardContainer'>
               {/* <div data-id={board._id} onClick={() => deleteBoard(board._id)} className={hovered === index ? 'trash show' : 'trash'}><img data-id={board._id}  src={dots}></img></div>  */}
+              {user && 
               <div data-id={board._id} onClick={() => setSettingsPopup(prev => prev === null ? index : null
-              )} className={hovered === index ? 'settings show' : 'settings'}><img data-id={board._id} src={dots}></img>
-                <ul className={settingsPopup === index ? ' settingsPopup show' : 'settingsPopup'}>
-                  <li onClick={() => setEditPopup(board)}>Edit</li>
-                  <li onClick={() => deleteBoard(board._id)}>Delete</li>
-                </ul>
-
-              </div>
+                )} className={hovered === index ? 'settings show' : 'settings'}><img data-id={board._id} src={dots}></img>
+                  <ul className={settingsPopup === index ? ' settingsPopup show' : 'settingsPopup'}>
+                    <li onClick={() => setEditPopup(board)}>Edit</li>
+                    <li onClick={() => deleteBoard(board._id)}>Delete</li>
+                  </ul>
+  
+                </div>
+              }
+              
               <section onClick={() => navigate(`/profile/${board._id}`, {
                 state: {
                   id: board._id,
@@ -173,11 +188,14 @@ console.log(editPopup)
               <span className='boardName'>{board.name}</span>
             </section>
           ))}
+          {user && 
           <div className='addButtonContainer'>
-            <button onClick={() => setPopup(true)} title='Create a board' className='addButton'>
-              <img src={plus}></img>
-            </button>
-          </div>
+          <button onClick={() => setPopup(true)} title='Create a board' className='addButton'>
+            <img src={plus}></img>
+          </button>
+        </div>
+          }
+          
         </section>
       </section>
     </>

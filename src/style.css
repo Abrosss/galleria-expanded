@@ -384,6 +384,7 @@ img {
   display: flex;
   gap: 0.5rem;
   color: #7D7D7D;
+  width: 100%;
 }
 
 .progress-container-center {
@@ -415,6 +416,9 @@ img {
 .controls {
   display: flex;
   gap: 2rem;
+}
+.controls .button {
+  padding: 0;
 }
 .controls img {
   width: 1.7rem;
@@ -779,6 +783,7 @@ img {
 
 .container {
   padding: 2.5rem;
+  padding-bottom: 3rem;
   display: flex;
   align-items: flex-start;
   flex-wrap: wrap;

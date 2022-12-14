@@ -8,6 +8,7 @@ function Masonry(props) {
   const [pics, setPics] = useState(props.imageUrls)
   const [hovered, setHovered] = useState(null)
   const [thumbnails, setThumbnails] = useState([])
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem('auth')))
   console.log(thumbnails)
 
   useEffect(() => {
@@ -73,7 +74,9 @@ useEffect(() => {
       <div  onClick={(e) => viewImage(img, i, e)} key={i} className="image">
          
         <div onMouseEnter={() => setHovered(i)} onMouseLeave={() => setHovered(null)} className='image-container'>
+       {user && 
         <div data-id={img._id} onClick={() => deleteBoard(img._id, img.board)} className={hovered === i ? 'trash show' : 'trash'}><img data-id={img._id}  src={trash}></img></div> 
+       }
       <img className='img' src={img.image} alt="thumbnail"   ></img>
     
       </div>
