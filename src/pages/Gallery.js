@@ -10,6 +10,7 @@ function Gallery() {
   const [board, setBoard] = useState([])
   const [pictures, setPictures] = useState([])
   const [updatePictures, setUpdatePictures] = useState(false)
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem('auth')))
   const navigate = useNavigate();
   const viewImage = (i) => {
 
@@ -63,7 +64,7 @@ function Gallery() {
     <>
 
       <header className='header'>
-        <Link to='/profile'><img src={logo} alt="logo"></img></Link>
+        <Link to={user ? '/profile' : '/'}><img src={logo} alt="logo"></img></Link>
         {pictures.length > 1 && <a onClick={() => viewImage(0)} href='/slideshow'>START SLIDESHOW</a>}
       </header>
 

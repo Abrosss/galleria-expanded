@@ -69,7 +69,7 @@ console.log(user)
      }
   return (
     <header>
-        <Link to ='/profile'><img src={logo} alt="logo"></img></Link>
+        <Link to ={user ? '/profile' : '/'}><img src={logo} alt="logo"></img></Link>
       {user ? <a onClick={handleLogout} href=''>Sign out</a> : <GoogleOAuthProvider
           clientId="730246444349-9hq6kctetsldg9sd6ssiiot1d476oje8.apps.googleusercontent.com"
 

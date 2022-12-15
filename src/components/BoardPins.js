@@ -14,7 +14,7 @@ import AddImagesForm from '../components/AddImagesForm';
 function BoardPins({ id, board, pictures, setPictures, setUpdatePictures }) {
     const boardName = useRef(null)
 
-    const [user, setUser] = useState(JSON.parse(localStorage.getItem('auth')))
+   
     const { linksPopup, setLinksPopup } = useContext(PopupContext);
     const { editPopup, setEditPopup } = useContext(ArtToBeEditedContext)
 
@@ -80,6 +80,7 @@ function BoardPins({ id, board, pictures, setPictures, setUpdatePictures }) {
                 board: id,
             });
             if (response.status === 200) {
+                document.body.style.overflowY = "unset";
                 updateState(response.data, inputList, 'pictures');
             }
 
@@ -95,15 +96,17 @@ function BoardPins({ id, board, pictures, setPictures, setUpdatePictures }) {
     async function addArt(e) {
 
         e.preventDefault()
+
         let notDone = inputList.filter(list => !list.link)
         if (notDone.length > 0) return
+
         try {
             const response = await axios.post('/addArt', {
                 links: inputList,
                 board: id,
             });
             if (response.status === 200) {
-
+                document.body.style.overflowY = "unset";
                 updateState(response.data, inputList, 'art');
             }
 
@@ -171,7 +174,7 @@ function BoardPins({ id, board, pictures, setPictures, setUpdatePictures }) {
                 <Masonry art={board.art} id={board._id} imageUrls={pictures} columnCount="4" />
 
 
-                {user && <AddButton />}
+               <AddButton />
 
             </section>
         </>
