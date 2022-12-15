@@ -137,7 +137,9 @@ function Home() {
 
       .catch(err => console.log(err))
   }
-
+  if (localStorage.getItem('auth')) {
+    return navigate('/profile');
+  }
 
   return (
     <>

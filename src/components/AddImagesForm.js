@@ -29,6 +29,7 @@ function AddImagesForm({isArt,  addPictures, inputList, setInputList}) {
       };
       const handleAddClick = (e) => {
         e.preventDefault()
+        if (Object.keys(inputList[active]).length === 0) return
         if (inputList.length < 6) setInputList([...inputList, {}]);
         else setError('you cannot add more')
     

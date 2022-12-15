@@ -69,8 +69,11 @@ function BoardPins({ id, board, pictures, setPictures, setUpdatePictures }) {
             .catch(err => console.log(err))
     }
     async function addPictures(e) {
-
+        
+    
         e.preventDefault()
+        let notDone = inputList.filter(list => !list.link)
+        if (notDone.length > 0) return
         try {
             const response = await axios.post('/addPicture', {
                 links: inputList,
