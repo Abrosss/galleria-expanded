@@ -197,7 +197,7 @@ function Home() {
                 <div data-id={board._id} onClick={() => setState({
                   ...state,
                   settingsPopup: settingsPopup === null ? index : null,  // update the settingsPopup value
-                })} className={hovered === index ? 'settings show' : 'settings'}><img data-id={board._id} src={dots}></img>
+                })} className={hovered === index ? 'settings show' : 'settings'}><img data-id={board._id} src={dots} alt="settings icon"></img>
                   <ul className={settingsPopup === index ? ' settingsPopup show' : 'settingsPopup'}>
                     <li onClick={() => setState({
                       ...state,
@@ -229,7 +229,7 @@ function Home() {
                 ...state,
                 popup: true,
               })} title='Create a board' className='addButton'>
-                <img src={plus}></img>
+                <img src={plus} alt="plus icon"></img>
               </button>
             </div>
           }

@@ -1,10 +1,8 @@
 import { useEffect, useState } from 'react';
 import Header from '../components/Header';
 import plus from '../shared/plus.svg'
-import dots from '../shared/dots.svg'
 import axios from '../api/axios'
 import { useNavigate } from 'react-router-dom';
-import Thumbnail from '../components/Thumbnail';
 import Board from '../components/Board';
 function Home() {
   const navigate = useNavigate()
@@ -203,7 +201,7 @@ function Home() {
                 popup: true,
         
               }) } title='Create a board' className='addButton'>
-            <img src={plus}></img>
+            <img src={plus} alt="plus icon"></img>
           </button>
         </div>
           }

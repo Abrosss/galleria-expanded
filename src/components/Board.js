@@ -14,7 +14,7 @@ function Board({boards, board, index, setEditPopup, deleteBoard}) {
         }} key={index} className='cardContainer'>
         
         {user && 
-        <div data-id={board._id} onClick={() => setSettingsPopup(prev => prev === null ? index : null)} className={hovered === index ? 'settings show' : 'settings'}><img data-id={board._id} src={dots}></img>
+        <div data-id={board._id} onClick={() => setSettingsPopup(prev => prev === null ? index : null)} className={hovered === index ? 'settings show' : 'settings'}><img data-id={board._id} src={dots} alt="settings icon"></img>
             <ul className={settingsPopup === index ? ' settingsPopup show' : 'settingsPopup'}>
               <li onClick={() => setEditPopup(board) }>Edit</li>
               <li onClick={() => deleteBoard(board._id)}>Delete</li>
