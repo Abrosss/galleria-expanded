@@ -5,15 +5,17 @@ import Masonry from '../components/Masonry';
 import AddButton from '../components/AddButton'
 import { useState } from 'react';
 import { useContext } from 'react';
-import ArtToBeEditedContext from '../context/EditedArt';
+
 import Modal from '../components/Modal'
 import ArtPictureForm from '../components/ArtPictureForm';
 import PopupContext from '../context/Popup';
+import ArtToBeEditedContext from '../context/EditedArt';
 function BoardPins({id, board, pictures, setPictures, setUpdatePictures}) {
     const boardName = useRef(null)
-    const {editPopup, setEditPopup} = useContext(ArtToBeEditedContext)
+  
     const [user, setUser] = useState(JSON.parse(localStorage.getItem('auth')))
     const { linksPopup, setLinksPopup } = useContext(PopupContext);
+    const {editPopup, setEditPopup} = useContext(ArtToBeEditedContext)
     const [active, setActive] = useState(0)
     const [inputList, setInputList] = useState([{}]);
     const [error, setError] = useState(null)
@@ -132,14 +134,7 @@ function BoardPins({id, board, pictures, setPictures, setUpdatePictures}) {
         setActive(i)
     
       }
-      const closeImage = (e) => {
-        if (e.target.className === "overlay") {
-          if (linksPopup) setLinksPopup(false)
-          if (editPopup) setEditPopup(null)
-          document.body.style.overflowY = "unset";
-        }
-    
-      }
+     
       const handleAddMoreClick = (e) => {
         e.preventDefault()
     
@@ -166,7 +161,7 @@ function BoardPins({id, board, pictures, setPictures, setUpdatePictures}) {
   return (
     <>
      {linksPopup &&
-        <Modal title="Add images" onClose={closeImage}>
+        <Modal title="Add images">
           <ul className="links">
             {inputList && inputList.map((list, i) => {
               const inputProps = {
@@ -188,7 +183,7 @@ function BoardPins({id, board, pictures, setPictures, setUpdatePictures}) {
 
       }
       {linksPopup && board.art &&
-        <Modal title="Add images" onClose={closeImage}>
+        <Modal title="Add images">
           <ul className="links">
             {inputList && inputList.map((list, i) => {
               const inputProps = {
@@ -215,7 +210,7 @@ function BoardPins({id, board, pictures, setPictures, setUpdatePictures}) {
 
       }
        {editPopup &&
-        <Modal title="Edit a picture" onClose={closeImage}>
+        <Modal title="Edit a picture">
           <ArtPictureForm
             inputProps={inputProps}
             editedArt={editPopup}
