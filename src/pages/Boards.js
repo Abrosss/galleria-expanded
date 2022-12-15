@@ -5,23 +5,21 @@ import dots from '../shared/dots.svg'
 import axios from '../api/axios'
 import { useNavigate } from 'react-router-dom';
 import Thumbnail from '../components/Thumbnail';
+import Board from '../components/Board';
 function Home() {
   const navigate = useNavigate()
   
     // Create an object to store all the different pieces of state
     const [state, setState] = useState({
       popup: false,
-      editPopup: null,
       user: JSON.parse(localStorage.getItem('auth')),
       name: null,
       boards: [],
       artCollection: false,
-      hovered: null,
-      settingsPopup: null,
     })
-  
+    const [editPopup, setEditPopup] = useState(null)
     // Use destructuring to extract the different pieces of state
-    const { popup, editPopup, user, name, boards, artCollection, hovered, settingsPopup } = state
+    const { popup, user, name, boards, artCollection} = state
   
  
 
@@ -45,9 +43,9 @@ function Home() {
     if (e.target.className === "overlay") {
       setState({
         ...state,  
-        popup: false,  
-        editPopup: null,  
+        popup: false 
       })
+      setEditPopup(null)
       document.body.style.overflowY = "unset";
     }
 
@@ -135,9 +133,10 @@ function Home() {
  
         setState({
           ...state,
-          boards: boards.map(board => board._id === id ? res.data : board),  // update the relevant board in the boards array
-          editPopup: null,  // update the editPopup value
+          boards: boards.map(board => board._id === id ? res.data : board)  // update the relevant board in the boards array
+          // update the editPopup value
         });
+        setEditPopup(null)
       }
 
     })
@@ -188,48 +187,14 @@ function Home() {
         <Header page={'boards'} />
         <section className='container'>
           {boards && boards.map((board, index) => (
-            <section onMouseEnter={() =>    setState({
-              ...state,
-              hovered: index,
-            })} onMouseLeave={() => {
-              setState({
-                ...state,
-                hovered: null,
-                settingsPopup: null
-              })
-           
-              }} key={index} className='cardContainer'>
-              
-              {user && 
-              <div data-id={board._id} onClick={() => setState({
-                ...state,
-                settingsPopup: settingsPopup === null ? index : null,  // update the settingsPopup value
-              })} className={hovered === index ? 'settings show' : 'settings'}><img data-id={board._id} src={dots}></img>
-                  <ul className={settingsPopup === index ? ' settingsPopup show' : 'settingsPopup'}>
-                    <li onClick={() => setState({
-                ...state,
-                editPopup: board,
-             
-              }) }>Edit</li>
-                    <li onClick={() => deleteBoard(board._id)}>Delete</li>
-                  </ul>
-  
-                </div>
-              }
-              
-              <section onClick={() => navigate(`/profile/${board._id}`, {
-                state: {
-                  id: board._id,
-                  art: board.art
-                }
-              })} className='card'>
-                <div className='thumbnails'>
+           <Board 
+            boards={boards}
+            board={board}
+            index={index}
+            setEditPopup={setEditPopup}
+            deleteBoard={deleteBoard}
 
-                  {boards && <Thumbnail thumbs={board.thumbnails} art={board.art} id={board._id} />}
-                </div>
-              </section>
-              <span className='boardName'>{board.name}</span>
-            </section>
+           />
           ))}
           {user && 
           <div className='addButtonContainer'>
