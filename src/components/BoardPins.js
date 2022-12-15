@@ -10,6 +10,7 @@ import Modal from '../components/Modal'
 import ArtPictureForm from '../components/ArtPictureForm';
 import PopupContext from '../context/Popup';
 import ArtToBeEditedContext from '../context/EditedArt';
+import ArtImagesForm from '../components/AddImagesForm'
 function BoardPins({id, board, pictures, setPictures, setUpdatePictures}) {
     const boardName = useRef(null)
   
@@ -18,7 +19,7 @@ function BoardPins({id, board, pictures, setPictures, setUpdatePictures}) {
     const {editPopup, setEditPopup} = useContext(ArtToBeEditedContext)
     const [active, setActive] = useState(0)
     const [inputList, setInputList] = useState([{}]);
-    const [error, setError] = useState(null)
+
     const [art, setArt] = useState([])
     const [editedArt, setEditedArt] = useState({})
     const inputProps = {
@@ -26,12 +27,7 @@ function BoardPins({id, board, pictures, setPictures, setUpdatePictures}) {
         onChange: e => handleInputChangeEditArt(e),
       };
       
-    const handleAddClick = (e) => {
-        e.preventDefault()
-        if (inputList.length < 6) setInputList([...inputList, {}]);
-        else setError('you cannot add more')
     
-      };
       function updateState(responseData, inputList, stateVar) {
         setLinksPopup(false);
         setUpdatePictures(responseData);
@@ -162,22 +158,8 @@ function BoardPins({id, board, pictures, setPictures, setUpdatePictures}) {
     <>
      {linksPopup &&
         <Modal title="Add images">
-          <ul className="links">
-            {inputList && inputList.map((list, i) => {
-              const inputProps = {
-                autoComplete: 'off',
-                onChange: e => handleInputChange(e, i),
-              };
-              return (
-                <li key={i}>
-                  <input {...inputProps} autoFocus className='input' type="text" placeholder="Paste a link" name="link" />
-                </li>
-              )
-            })}
-          </ul>
-          {error && <span>{error}</span>}
-          <button className='addMoreLinks' onClick={handleAddClick}>Add more images</button>
-          <button onClick={addPictures}>Submit</button>
+            <ArtImagesForm isArt={false} addPictures={addPictures} inputList={inputList} setInputList={setInputList}/>
+          
 
         </Modal>
 
