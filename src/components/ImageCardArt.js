@@ -9,7 +9,7 @@ function ImageCardArt({pics, img, index, setPics, setEditPopup}) {
     const navigate = useNavigate();
     const [hovered, setHovered] = useState(null)
     const [settingsPopup, setSettingsPopup] = useState(null)
-      const [user, setUser] = useState(JSON.parse(localStorage.getItem('auth')))
+
       const viewImage = (img, i, e) => {
         console.log(e.target.tagName)
         if(!e.target.dataset.id && e.target.tagName !== 'LI') {
