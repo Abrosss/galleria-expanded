@@ -853,6 +853,9 @@ img {
   }
 }
 @media (min-width: 250px) and (max-width: 768px) {
+  .overlay {
+    padding: 1rem;
+  }
   .trash {
     display: flex;
   }
