@@ -7,6 +7,7 @@ import Gallery from './pages/Gallery'
 import SignIn from './pages/SignIn'
 import DefaultPage from './pages/DefaultPage'
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
+import { PopupComponent } from './context/Popup';
 function App() {
   return (
     <>
@@ -14,7 +15,11 @@ function App() {
     <Router>
 
       <Routes>
-        <Route path="/profile/:id" element = {<Gallery/>}/>
+        <Route path="/profile/:id" element={
+            <PopupComponent>
+              <Gallery />
+            </PopupComponent>
+          }/>
         <Route path="/profile" element = {<Boards/>}/>
         <Route path='/slideshow' element = {<Slideshow/>}/>
         <Route path='/signin' element = {<SignIn/>}/>
