@@ -1,15 +1,17 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import { useContext } from 'react';
 import axios from '../api/axios';
-
+import ArtToBeEditedContext from '../context/EditedArt';
 import dots from '../shared/dots.svg'
-function ImageCardArt({pics, img, index, setPics, setEditPopup}) {
+function ImageCardArt({pics, img, index, setPics}) {
 
     const navigate = useNavigate();
     const [hovered, setHovered] = useState(null)
     const [settingsPopup, setSettingsPopup] = useState(null)
-
+    const {editPopup, setEditPopup } = useContext(ArtToBeEditedContext);
+    console.log(editPopup)
       const viewImage = (img, i, e) => {
         console.log(e.target.tagName)
         if(!e.target.dataset.id && e.target.tagName !== 'LI') {

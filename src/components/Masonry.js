@@ -6,6 +6,8 @@ import axios from '../api/axios';
 import { useState, useEffect } from 'react';
 import ImageCard from './ImageCard';
 import ImageCardArt from './ImageCardArt';
+import ArtToBeEditedContext from '../context/EditedArt';
+import { EditedArtComponent } from '../context/EditedArt';
 function Masonry(props) {
   const [pics, setPics] = useState(props.imageUrls)
  
@@ -26,7 +28,7 @@ useEffect(() => {
     <div className='masonry'>
     {pics.map((img, i) => (
       props.art ? 
-        <ImageCardArt pics={pics} setPics={setPics} img={img} index={i} setEditPopup={props.setEditPopup}/>
+        <ImageCardArt pics={pics} setPics={setPics} img={img} index={i}/>
      : <ImageCard pics={pics} setPics={setPics} img={img} index={i}/>
       
       
