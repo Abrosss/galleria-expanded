@@ -62,7 +62,7 @@ function Gallery() {
   return (
     <>
 
-      <header>
+      <header className='header'>
         <Link to='/profile'><img src={logo} alt="logo"></img></Link>
         {pictures.length > 1 && <a onClick={() => viewImage(0)} href='/slideshow'>START SLIDESHOW</a>}
       </header>

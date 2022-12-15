@@ -54,6 +54,10 @@ header a:hover {
   color: black;
 }
 
+.header a {
+  font-size: 0.7rem;
+}
+
 .link {
   text-decoration: underline;
   color: #7D7D7D;
@@ -866,6 +870,10 @@ img {
     gap: 0;
     position: fixed;
     bottom: 0;
+  }
+  .progress-container .changePerSlide {
+    font-size: 0.8rem;
+    gap: 0.3rem;
   }
   .controls {
     gap: 1rem;

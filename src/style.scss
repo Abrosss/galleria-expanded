@@ -54,7 +54,11 @@ header {
         }
     }
 }
-
+.header {
+    a {
+        font-size: .7rem;
+    }
+}
 .link {
     text-decoration: underline;
     color: $gray;
@@ -854,6 +858,8 @@ img {
   }
 
 @media (min-width: 250px) and (max-width: 768px) {
+
+   
     .trash  {
         display: flex;
     }
@@ -873,6 +879,10 @@ img {
         gap: 0;
         position: fixed;
         bottom: 0;
+        .changePerSlide {
+            font-size: .8rem;
+            gap: 0.3rem;
+         }
     }
     .controls {
         gap: 1rem;
