@@ -28,14 +28,15 @@ function Gallery() {
 
   useEffect(() => {
     //make sure the board is loaded
-    if (board !== []) {
+    console.log(board)
+    if (board._id !== undefined) {
       axios.put(`/boards/thumbnails/${board._id}`, {
         thumbnails: pictures.slice(0, 4)
 
       }).catch(err => console.log(err))
     }
 
-  }, [pictures])
+  }, [board, pictures])
 
   async function fetchData(id, state) {
     let url = '/pictures/' + id;
@@ -45,14 +46,14 @@ function Gallery() {
     return axios.get(url).then(response => response.data);
   }
   useEffect(() => {
-    fetchData(location.state.id, location.state.art).then(data => {
+    fetchData(location?.state.id, location?.state.art).then(data => {
       setPictures(data);
     });
   }, [updatePictures]);
 
   useEffect(() => {
 
-    axios.get(`/boards/${location.state.id}`).then((response) => {
+    axios.get(`/boards/${location?.state.id}`).then((response) => {
 
       setBoard(response.data[0]);
     });
@@ -67,7 +68,7 @@ function Gallery() {
       </header>
 
       <EditedArtComponent>
-        <BoardPins id={location.state.id} board={board} pictures={pictures} setPictures={setPictures} setUpdatePictures={setUpdatePictures} />
+        <BoardPins id={location?.state.id} board={board} pictures={pictures} setPictures={setPictures} setUpdatePictures={setUpdatePictures} />
       </EditedArtComponent>
     </>
   )

@@ -19,16 +19,16 @@ function Home() {
     // Use destructuring to extract the different pieces of state
     const { popup, user, name, boards, artCollection} = state
   
- 
+
 
   useEffect(() => {
-   
+
       axios.get(`/allboards/${user._id}`).then((response) => {
-   
+
         setState(prevState => ({
           ...prevState,
           boards: response.data,
-   
+          
         }))
       });
     
