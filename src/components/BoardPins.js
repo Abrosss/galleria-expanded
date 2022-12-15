@@ -17,7 +17,7 @@ function BoardPins({id, board, pictures, setPictures, setUpdatePictures}) {
     const [user, setUser] = useState(JSON.parse(localStorage.getItem('auth')))
     const { linksPopup, setLinksPopup } = useContext(PopupContext);
     const {editPopup, setEditPopup} = useContext(ArtToBeEditedContext)
-    const [active, setActive] = useState(0)
+    
     const [inputList, setInputList] = useState([{}]);
 
     const [art, setArt] = useState([])
@@ -124,23 +124,9 @@ function BoardPins({id, board, pictures, setPictures, setUpdatePictures}) {
     
         }
       }
-      const toggleActive = (i) => {
-        if (active === i)
-          return setActive(null)
-        setActive(i)
     
-      }
      
-      const handleAddMoreClick = (e) => {
-        e.preventDefault()
     
-        if (Object.keys(inputList[active]).length === 0) return
-        setInputList([...inputList, {}]);
-        setActive(prev => prev + 1)
-    
-    
-    
-      };
       const handleInputChange = (e, index) => {
         const { name, value } = e.target;
     
@@ -159,35 +145,12 @@ function BoardPins({id, board, pictures, setPictures, setUpdatePictures}) {
      {linksPopup &&
         <Modal title="Add images">
             <ArtImagesForm isArt={false} addPictures={addPictures} inputList={inputList} setInputList={setInputList}/>
-          
-
         </Modal>
 
       }
       {linksPopup && board.art &&
         <Modal title="Add images">
-          <ul className="links">
-            {inputList && inputList.map((list, i) => {
-              const inputProps = {
-                autoComplete: 'off',
-                onChange: e => handleInputChange(e, i),
-              };
-              return (
-                <li key={i}>
-                  <h1><span onClick={() => toggleActive(i)}>{i + 1}.</span><input {...inputProps} autoFocus required id='title' className='input' type="text" placeholder="Title" name="title" /></h1>
-                  <ArtPictureForm
-                    inputProps={inputProps}
-                    active={i === active}
-                    toBeEdited={false}
-                  />
-                </li>
-              )
-            })}
-          </ul>
-          <div className='buttons'>
-            <button className='addMoreLinks' onClick={handleAddMoreClick}>Add more images</button>
-            <button onClick={addArt}>Submit</button>
-          </div>
+         <ArtImagesForm isArt={true} addPictures={addArt} inputList={inputList} setInputList={setInputList}/>
         </Modal>
 
       }
