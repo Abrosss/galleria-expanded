@@ -5,7 +5,7 @@ import { useContext } from 'react';
 import axios from '../api/axios';
 import ArtToBeEditedContext from '../context/EditedArt';
 import dots from '../shared/dots.svg'
-function ImageCardArt({pics, img, index, setPics}) {
+function ImageCardArt({img, index, deletePicture}) {
 
     const navigate = useNavigate();
     const [hovered, setHovered] = useState(null)
@@ -23,24 +23,7 @@ function ImageCardArt({pics, img, index, setPics}) {
         
     
       }
-      async function deleteBoard(id) {
-
-        try {
-          const updatedPics = pics.filter(pic => pic._id !== id);
-          
-     
-          await axios.delete(`/art/${id}`)
-          .then(res => {
-            if(res.status === 200) {
-              setPics(updatedPics)
-          }})
-          .catch(err=>console.log(err))
-         
-        } catch (err) {
-          console.log(err);
-        }
-        
-    }
+      
  
     return (
         <div  onClick={(e) => viewImage(img, index, e)} key={index} className="image">
@@ -51,7 +34,7 @@ function ImageCardArt({pics, img, index, setPics}) {
               )} className={hovered === index ? 'settings show' : 'settings'}><img data-id={img._id} src={dots}></img>
                 <ul className={settingsPopup === index ? ' settingsPopup show' : 'settingsPopup'}>
                   <li onClick={() => setEditPopup(img)}>Edit</li>
-                  <li onClick={() => deleteBoard(img._id, img.board)}>Delete</li>
+                  <li onClick={() => deletePicture(img._id)}>Delete</li>
                 </ul>
 
               </div>
