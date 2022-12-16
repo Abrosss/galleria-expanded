@@ -45,7 +45,7 @@ function Slideshow() {
   useEffect(() => {
     setLoaded(false)
     axios.get(`/boards/${art.img.board}`).then((response) => {
-     
+
       setBoard(response.data[0]);
       setLoaded(true)
     });
@@ -123,7 +123,7 @@ function Slideshow() {
 
   }
 
-  const slide = (e) => {
+  const slideToggle = (e) => {
     e.preventDefault()
     setSlideshow(!slideshow)
 
@@ -140,11 +140,16 @@ function Slideshow() {
 
   return (
     <>
-      <section className={loaded && board.art ? 'page' : 'page single' }>
+      <section className={loaded && board.art ? 'page' : 'page single'}>
 
         <header className='header'>
           <Link to='/profile'><img src={logo} alt="logo"></img></Link>
-         {pictures?.length >1 && <a onClick={slide} href='/slideshow'>START SLIDESHOW</a> } 
+          {pictures?.length > 1 &&
+            slideshow ?
+            <a onClick={slideToggle} href='/slideshow'>STOP SLIDESHOW</a> :
+            <a onClick={slideToggle} href='/slideshow'>START SLIDESHOW</a>
+
+          }
         </header>
         {loaded && !board.art && <SlideshowSinglePics art={art} />}
         {loaded && board.art && <SlideshowArt art={art} setSlideshow={setSlideshow} />}
