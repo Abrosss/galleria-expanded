@@ -756,6 +756,9 @@ img {
   border-radius: 15px;
   position: relative;
 }
+.cardContainer .card:hover {
+  filter: brightness(80%);
+}
 .cardContainer .card .thumbnails {
   width: 100%;
   height: 100%;
