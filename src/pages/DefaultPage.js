@@ -5,6 +5,7 @@ import dots from '../shared/dots.svg'
 import axios from '../api/axios'
 import { useNavigate } from 'react-router-dom';
 import Thumbnail from '../components/Thumbnail';
+import Board from '../components/Board'
 function Home() {
   const navigate = useNavigate()
   const [state, setState] = useState({
@@ -182,48 +183,11 @@ function Home() {
         <Header page={'boards'} />
         <section className='container'>
           {boards && boards.map((board, index) => (
-            <section onMouseEnter={() => setState({
-              ...state,
-              hovered: index,
-            })} onMouseLeave={() => {
-
-              setState({
-                ...state,
-                hovered: null,
-                settingsPopup: null
-              })
-
-            }} key={index} className='cardContainer'>
-
-              {user &&
-                <div data-id={board._id} onClick={() => setState({
-                  ...state,
-                  settingsPopup: settingsPopup === null ? index : null,  // update the settingsPopup value
-                })} className={hovered === index ? 'settings show' : 'settings'}><img data-id={board._id} src={dots} alt="settings icon"></img>
-                  <ul className={settingsPopup === index ? ' settingsPopup show' : 'settingsPopup'}>
-                    <li onClick={() => setState({
-                      ...state,
-                      editPopup: board,
-                    })}>Edit</li>
-                    <li onClick={() => deleteBoard(board._id)}>Delete</li>
-                  </ul>
-
-                </div>
-              }
-
-              <section onClick={() => navigate(`/profile/${board._id}`, {
-                state: {
-                  id: board._id,
-                  art: board.art
-                }
-              })} className='card'>
-                <div className='thumbnails'>
-
-                  {boards && <Thumbnail thumbs={board.thumbnails} art={board.art} id={board._id} />}
-                </div>
-              </section>
-              <span className='boardName'>{board.name}</span>
-            </section>
+            <Board
+            board={board}
+            index={index}
+            />
+         
           ))}
           {user &&
             <div className='addButtonContainer'>

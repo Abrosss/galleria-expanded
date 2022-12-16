@@ -2,15 +2,23 @@ import React from 'react'
 import { useContext } from 'react';
 import PopupContext from '../context/Popup';
 import plus from '../shared/plus.svg'
-function AddButton({title}) {
-    const {linksPopup, setLinksPopup } = useContext(PopupContext);
-    console.log(linksPopup)
+function AddButton({ title }) {
+    const { setLinksPopup } = useContext(PopupContext);
+
+    function onButtonClick() {
+        setLinksPopup(true)
+        document.body.style.overflowY = "hidden"
+    }
+
     return (
         <div className='addButtonContainer'>
-            <button title={title} onClick={() => {
-                setLinksPopup(true)
-                document.body.style.overflowY = "hidden"
-            }} className='addButton'><img src={plus}></img></button></div>
+            <button
+                title={title}
+                onClick={onButtonClick}
+                className='addButton'>
+                <img src={plus} alt='add icon'></img>
+            </button>
+        </div>
     )
 }
 
