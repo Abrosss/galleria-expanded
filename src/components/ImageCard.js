@@ -43,9 +43,9 @@ function ImageCard({pics, img, index, setPics}) {
         <div onClick={(e) => viewImage(img, index, e)} key={index} className="image">
 
             <div onMouseEnter={() => setHovered(index)} onMouseLeave={() => setHovered(null)} className='image-container'>
-                {user &&
+             
                     <div data-id={img._id} onClick={() => deleteBoard(img._id, img.board)} className={hovered === index ? 'trash show' : 'trash'}><img data-id={img._id} src={trash}></img></div>
-                }
+                
                 <img className='img' src={img.image} alt="thumbnail"   ></img>
 
             </div>

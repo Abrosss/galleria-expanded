@@ -186,7 +186,7 @@ function Home() {
         <section className='container'>
           {boards && boards.map((board, index) => (
            <Board 
-            boards={boards}
+            key={index}
             board={board}
             index={index}
             setEditPopup={setEditPopup}

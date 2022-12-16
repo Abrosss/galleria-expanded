@@ -705,7 +705,11 @@ img {
     bottom: 5%;
     cursor: pointer;
     left: 50%;
-    transform: translateX(-50%)
+    transform: translateX(-50%);
+    border: 1px transparent solid;
+    &:hover {
+        border: 1px rgb(195, 207, 207) solid;
+    }
 }
 .addButton {
     width: 3rem;

@@ -174,7 +174,7 @@ function BoardPins({ id, board, pictures, setPictures, setUpdatePictures }) {
                 <Masonry art={board.art} id={board._id} imageUrls={pictures} columnCount="4" />
 
 
-               <AddButton />
+               <AddButton title={'Add pictures'} />
 
             </section>
         </>

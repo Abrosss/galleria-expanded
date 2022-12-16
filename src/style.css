@@ -696,6 +696,10 @@ img {
   cursor: pointer;
   left: 50%;
   transform: translateX(-50%);
+  border: 1px transparent solid;
+}
+.addButtonContainer:hover {
+  border: 1px rgb(195, 207, 207) solid;
 }
 
 .addButton {
