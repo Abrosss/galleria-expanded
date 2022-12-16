@@ -73,7 +73,7 @@ function ArtPictureForm({ inputProps, active, editedArt }) {
                 type="text"
                 placeholder="Artist image link (optional)"
                 name="artistlink"
-                defaultValue= {editedArt?.artist?.link}
+                defaultValue= {editedArt?.artist?.image}
             />
 
             <input

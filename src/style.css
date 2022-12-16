@@ -490,11 +490,11 @@ img {
   display: flex;
   position: relative;
   max-height: 90%;
-  max-width: 90%;
+  max-width: 40%;
 }
 .zoom-image img {
-  -o-object-fit: contain;
-     object-fit: contain;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 .close {
@@ -562,13 +562,15 @@ img {
   border-radius: 15px;
   font-size: 1.1rem;
   border: 1px rgba(0, 0, 0, 0.3) solid;
+  margin-bottom: 5px;
 }
 .modal input:focus {
   outline: #7D7D7D;
 }
 .modal textarea {
-  min-height: 3rem;
+  min-height: 4rem;
   resize: none;
+  margin-bottom: 5px;
 }
 .modal button {
   padding: 1rem 2rem;

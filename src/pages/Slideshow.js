@@ -22,7 +22,7 @@ function Slideshow() {
   const [pictures, setPictures] = useState(location.state.pictures)
   const [secondsPerSlide, setSecondsPerSlide] = useState(4)
   const [board, setBoard] = useState([])
-
+  const [user, setUser] = useState(localStorage.getItem('auth'))
   const secondsInput = useRef()
   console.log(secondsPerSlide)
   useEffect(() => {
@@ -143,7 +143,7 @@ function Slideshow() {
       <section className={loaded && board.art ? 'page' : 'page single'}>
 
         <header className='header'>
-          <Link to='/profile'><img src={logo} alt="logo"></img></Link>
+          <Link to={user ? '/profile' : '/'}><img src={logo} alt="logo"></img></Link>
           {pictures?.length > 1 &&
             slideshow ?
             <a onClick={slideToggle} href='/slideshow'>STOP SLIDESHOW</a> :

@@ -48,6 +48,7 @@ function Gallery() {
   }
   useEffect(() => {
     fetchData(location?.state.id, location?.state.art).then(data => {
+      console.log(data)
       setPictures(data);
     });
   }, [updatePictures]);
