@@ -82,7 +82,7 @@ function ArtPictureForm({ inputProps, active, editedArt }) {
                 className="input"
                 type="text"
                 placeholder="Source link (wiki)"
-                name="wiki"
+                name="source"
                 defaultValue= {editedArt?.source}
             />
         </form>

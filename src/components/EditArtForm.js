@@ -10,10 +10,8 @@ function EditArtForm({editedArt, editArt}) {
         const { name, value } = e.target;
 
         editedArt[name] = value;
-        console.log(editedArt)
 
     };
-  
     return (
         <>
             <ArtPictureForm

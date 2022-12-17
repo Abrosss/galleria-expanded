@@ -47,20 +47,21 @@ function BoardPins({ id, board, pictures, setPictures, setUpdatePictures }) {
 
     function editArt(e, id) {
 
-        let artist = {
-            name: editedArt.artist,
-            image: editedArt.artistlink
-        }
-        let updatedArt = { ...editedArt, artist }
         e.preventDefault()
         axios.put(`/art/${id}`, {
-            updatedArt: updatedArt
+            title: editedArt.title,
+            image:editedArt.link,
+            description:editedArt.description,
+            artist: {name: editedArt.artist, image: editedArt.artistlink},
+            year: editedArt.year,
+            source:editedArt.source
 
         }).then(res => {
             if (res.status === 200) {
 
                 setPictures(pictures.map(pic => pic._id === id ? res.data : pic));
                 setEditPopup(null)
+                setEditedArt({})
             }
 
         })
