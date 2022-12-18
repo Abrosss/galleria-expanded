@@ -6,11 +6,9 @@ import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import axios from '../api/axios'
 import Axios from 'axios'
-import { GoogleLogin } from '@react-oauth/google'
 import GoogleAuthButton from '../components/GoogleAuthButton'
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import jwtDecode from 'jwt-decode'
-const LOGIN_URL = '/login'
 function SignIn() {
   axios.defaults.withCredentials = true
 
