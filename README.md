@@ -6,6 +6,9 @@ Expanded full-stack version of [this app](https://github.com/Abrosss/galleria)
 ### Screenshots
 
 ![](./boards.png)
+![](./pictures.png)
+![](./slideshowart.png)
+![](./slideshow.png)
 
 ### Built with
 
