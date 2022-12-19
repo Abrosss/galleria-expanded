@@ -8,7 +8,7 @@ Expanded full-stack version of [this app](https://github.com/Abrosss/galleria)
 ![](./boards.png)
 ![](./pictures.png)
 
-## Two types of slideshows:
+## Slideshows look different, depending on the board type:
 ![](./slideshowart.png)
 ![](./slideshow.png)
 
