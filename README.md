@@ -3,9 +3,9 @@
 
 Expanded full-stack version of [this app](https://github.com/Abrosss/galleria)
 
-### Screenshot
+### Screenshots
 
-![](./galleria.png)
+![](./boards.png)
 
 ### Built with
 
