@@ -6,6 +6,11 @@
 .pnp.js
 .netlify
 /screenshots
+/backend/.vercel
+/backend/.env
+/backend/node_modules
+/backend/.gitignore
+/backend/vercel.json
 # testing
 /coverage
 
