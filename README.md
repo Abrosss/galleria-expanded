@@ -1,11 +1,21 @@
 
-### The challenge
+### Description
 
-Expanded full-stack version of [this app](https://github.com/Abrosss/galleria)
+Expanded full-stack version of [this challenge](https://github.com/Abrosss/galleria). 
 
-### Screenshot
+- [x] Manage art collections
+- [x] Manage images and art content inside of them
+- [x] Play and customize slideshows
 
-![](./galleria.png)
+
+### Screenshots
+
+![](./boards.png)
+![](./pictures.png)
+
+## Slideshows look different, depending on the board type:
+![](./slideshowart.png)
+![](./slideshow.png)
 
 ### Built with
 
