@@ -15,11 +15,7 @@ function App() {
     <Router>
 
       <Routes>
-        <Route path="/profile/:id" element={
-            <PopupComponent>
-              <Gallery />
-            </PopupComponent>
-          }/>
+        <Route path="/profile/:id" element={<PopupComponent><Gallery /></PopupComponent>}/>
         <Route path="/profile" element = {<Boards/>}/>
         <Route path='/slideshow' element = {<Slideshow/>}/>
         <Route path='/signin' element = {<SignIn/>}/>
