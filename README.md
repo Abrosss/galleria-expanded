@@ -10,12 +10,12 @@ Expanded full-stack version of [this challenge](https://github.com/Abrosss/galle
 
 ### Screenshots
 
-![](./boards.png)
-![](./pictures.png)
+![](./screenshots/boards.png)
+![](./screenshots/pictures.png)
 
 ## Slideshows look different, depending on the board type:
-![](./slideshowart.png)
-![](./slideshow.png)
+![](./screenshots/slideshowart.png)
+![](./screenshots/slideshow.png)
 
 ### Built with
 
