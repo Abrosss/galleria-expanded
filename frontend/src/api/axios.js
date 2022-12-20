@@ -1,6 +1,6 @@
 import axios from 'axios'
 
 export default axios.create({
-    baseURL: 'https://galleria-one.vercel.app/api'
+    baseURL: process.env.REACT_APP_API_URL
 })
 

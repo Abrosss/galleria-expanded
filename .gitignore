@@ -6,6 +6,7 @@
 .pnp.js
 .netlify
 /screenshots
+/frontend/.env
 /backend/.vercel
 /backend/.env
 /backend/node_modules
