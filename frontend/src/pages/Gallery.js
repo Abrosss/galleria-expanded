@@ -29,7 +29,7 @@ function Gallery() {
 
   useEffect(() => {
     //make sure the board is loaded
-    console.log(board)
+
     if (board._id !== undefined) {
       axios.put(`/boards/thumbnails/${board._id}`, {
         thumbnails: pictures.slice(0, 4)
@@ -48,7 +48,7 @@ function Gallery() {
   }
   useEffect(() => {
     fetchData(location?.state.id, location?.state.art).then(data => {
-      console.log(data)
+      
       setPictures(data);
     });
   }, [updatePictures]);

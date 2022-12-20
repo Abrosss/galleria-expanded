@@ -19,12 +19,16 @@ function Slideshow() {
   const [slideshow, setSlideshow] = useState(location.state.slide)
   const [loaded, setLoaded] = useState(false)
   const [pictures, setPictures] = useState(location.state.pictures)
-  const [progress, setProgress] = useState(Math.round((art.i / (pictures?.length - 1)) * 100))
+  const [progress, setProgress] = useState(0)
   const [secondsPerSlide, setSecondsPerSlide] = useState(4)
   const [board, setBoard] = useState([])
   const [user, setUser] = useState(localStorage.getItem('auth'))
   const secondsInput = useRef()
-  console.log(secondsPerSlide)
+
+  useEffect(() => {
+   setProgress(Math.round((art?.i / (pictures?.length - 1)) * 100))
+  }, [art, pictures]);
+
   useEffect(() => {
     if (board.art) {
       axios.get(`/art/${art.img.board}`).then((response) => {
@@ -103,10 +107,10 @@ function Slideshow() {
   function slider(secondsPerSlide) {
     let total = secondsPerSlide * pictures.length
     let second = 100 / total
-    console.log(total)
+   
 
     if (slideshow) {
-      console.log(timeleft++)
+   
       setProgress(prev => prev + second)
     }
 
