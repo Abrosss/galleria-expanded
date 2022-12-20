@@ -10,7 +10,7 @@ function ImageCardArt({ img, index, deletePicture }) {
   const [hovered, setHovered] = useState(null)
   const [settingsPopup, setSettingsPopup] = useState(null)
   const { editPopup, setEditPopup } = useContext(ArtToBeEditedContext);
-
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem('auth')))
   const viewImage = (img, i, e) => {
     console.log(e.target.tagName)
     if (!e.target.dataset.id && e.target.tagName !== 'LI') {
@@ -35,19 +35,22 @@ function ImageCardArt({ img, index, deletePicture }) {
   return (
     <div onClick={(e) => viewImage(img, index, e)} key={index} className="image">
 
-      <div 
-      onMouseEnter={() => onMouseEnter(index)} 
-      onMouseLeave={onMouseLeave} 
-      className='image-container'>
+      <div
+        onMouseEnter={() => onMouseEnter(index)}
+        onMouseLeave={onMouseLeave}
+        className='image-container'>
 
-        <div data-id={img._id} onClick={() => setSettingsPopup(prev => prev === null ? index : null
-        )} className={hovered === index ? 'settings show' : 'settings'}><img data-id={img._id} src={dots} alt='settings icon'></img>
-          <ul className={settingsPopup === index ? ' settingsPopup show' : 'settingsPopup'}>
-            <li onClick={() => setEditPopup(img)}>Edit</li>
-            <li onClick={() => deletePicture(img._id)}>Delete</li>
-          </ul>
+        {user &&
+          <div data-id={img._id} onClick={() => setSettingsPopup(prev => prev === null ? index : null
+          )} className={hovered === index ? 'settings show' : 'settings'}><img data-id={img._id} src={dots} alt='settings icon'></img>
+            <ul className={settingsPopup === index ? ' settingsPopup show' : 'settingsPopup'}>
+              <li onClick={() => setEditPopup(img)}>Edit</li>
+              <li onClick={() => deletePicture(img._id)}>Delete</li>
+            </ul>
 
-        </div>
+          </div>
+        }
+
         <img className='img dimmed' src={img.image} alt="thumbnail"   ></img>
         <div className='caption'>
           <h2>{img.title}</h2>

@@ -22,6 +22,7 @@ function BoardPins({ id, board, pictures, setPictures, setUpdatePictures }) {
 
     const [art, setArt] = useState([])
     const [editedArt, setEditedArt] = useState({})
+    const [user, setUser] = useState(JSON.parse(localStorage.getItem('auth')))
     const inputProps = {
         autoComplete: 'off',
         onChange: e => handleInputChangeEditArt(e),
@@ -174,8 +175,10 @@ function BoardPins({ id, board, pictures, setPictures, setUpdatePictures }) {
 
                 <Masonry art={board.art} id={board._id} imageUrls={pictures} columnCount="4" />
 
-
-               <AddButton title={'Add pictures'} />
+            {user && <AddButton title={'Add pictures'} /> }
+            
+            
+               
 
             </section>
         </>

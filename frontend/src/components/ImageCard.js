@@ -39,16 +39,19 @@ function ImageCard({ img, index, deletePicture }) {
             key={index}
             className="image">
 
-            <div 
-            onMouseEnter={() => onMouseEnter(index)} 
-            onMouseLeave={onMouseLeave} 
-            className='image-container'>
+            <div
+                onMouseEnter={() => onMouseEnter(index)}
+                onMouseLeave={onMouseLeave}
+                className='image-container'>
 
-                <div 
-                data-id={img._id} 
-                onClick={() => deletePicture(img._id)} 
-                className={hovered === index ? 'trash show' : 'trash'}>
-                <img data-id={img._id} src={trash} alt='delete picture icon'></img></div>
+                {user &&
+                    <div
+                        data-id={img._id}
+                        onClick={() => deletePicture(img._id)}
+                        className={hovered === index ? 'trash show' : 'trash'}>
+                        <img data-id={img._id} src={trash} alt='delete picture icon'></img></div>
+                }
+
 
                 <img className='img' src={img.image} alt="main picture"></img>
 

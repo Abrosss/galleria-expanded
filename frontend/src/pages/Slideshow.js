@@ -6,7 +6,6 @@ import next from '../shared/icon-next-button.svg'
 import play from '../shared/play.svg'
 import pause from '../shared/pause.svg'
 import view from '../shared/icon-view-image.svg'
-import gallery from '../data.json'
 import logo from '../shared/logo.svg';
 import { Link } from 'react-router-dom'
 import axios from '../api/axios';
@@ -16,10 +15,11 @@ function Slideshow() {
   const location = useLocation();
 
   const [art, setArt] = useState(location.state.art)
-  const [progress, setProgress] = useState(Math.round((art.i / (gallery.length - 1)) * 100))
+ 
   const [slideshow, setSlideshow] = useState(location.state.slide)
   const [loaded, setLoaded] = useState(false)
   const [pictures, setPictures] = useState(location.state.pictures)
+  const [progress, setProgress] = useState(Math.round((art.i / (pictures?.length - 1)) * 100))
   const [secondsPerSlide, setSecondsPerSlide] = useState(4)
   const [board, setBoard] = useState([])
   const [user, setUser] = useState(localStorage.getItem('auth'))
