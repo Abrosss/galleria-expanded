@@ -69,12 +69,14 @@ function Masonry(props) {
               img={img}
               index={i}
               deletePicture={deleteArt}
+              pictures={pics}
             />
             :
             <ImageCard
               img={img}
               index={i}
               deletePicture={deletePicture}
+              pictures={pics}
             />
 
         ))}

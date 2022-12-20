@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useContext } from 'react';
 import ArtToBeEditedContext from '../context/EditedArt';
 import dots from '../shared/dots.svg'
-function ImageCardArt({ img, index, deletePicture }) {
+function ImageCardArt({ img, index, deletePicture, pictures }) {
 
   const navigate = useNavigate();
   const [hovered, setHovered] = useState(null)
@@ -17,7 +17,8 @@ function ImageCardArt({ img, index, deletePicture }) {
       navigate('/slideshow', {
         state: {
           art: { img, i },
-          slide: false
+          slide: false,
+          pictures:pictures
         }
       });
     }

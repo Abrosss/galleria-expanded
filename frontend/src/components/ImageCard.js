@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import trash from '../shared/trash.svg'
 
-function ImageCard({ img, index, deletePicture }) {
+function ImageCard({ img, index, deletePicture, pictures }) {
 
     const navigate = useNavigate();
     const [hovered, setHovered] = useState(null)
@@ -16,7 +16,8 @@ function ImageCard({ img, index, deletePicture }) {
             navigate('/slideshow', {
                 state: {
                     art: { img, i },
-                    slide: false
+                    slide: false,
+                    pictures:pictures
                 }
             });
         }
