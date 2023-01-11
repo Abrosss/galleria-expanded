@@ -20,9 +20,9 @@ function SlideshowArt({ art, setSlideshow }) {
                 <section className='slideshow-container '>
                     <section className='image-container'>
                         <div className="image-container__image">
-                            <img src={art?.img?.image} alt="art"   ></img>
+                            <img src={art?.img?.image} alt="art"   loading="lazy"></img>
                             <div onClick={() => viewImage(art.img, art.i)} className='view-image'>
-                                <div><img src={view} alt="art"></img></div>
+                                <div><img src={view} alt="art" loading="lazy"></img></div>
                                 <span>VIEW IMAGE</span>
                             </div>
 
@@ -34,7 +34,7 @@ function SlideshowArt({ art, setSlideshow }) {
                             </div>
                             {art?.img?.artist?.image &&
                                 <div className='artist'>
-                                    <img src={art?.img?.artist?.image} alt="artist"></img>
+                                    <img src={art?.img?.artist?.image} alt="artist" loading="lazy"></img>
                                 </div>
                             }
 

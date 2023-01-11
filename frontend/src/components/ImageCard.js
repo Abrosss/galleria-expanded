@@ -2,6 +2,7 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import trash from '../shared/trash.svg'
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 function ImageCard({ img, index, deletePicture, pictures }) {
 
@@ -50,11 +51,11 @@ function ImageCard({ img, index, deletePicture, pictures }) {
                         data-id={img._id}
                         onClick={() => deletePicture(img._id)}
                         className={hovered === index ? 'trash show' : 'trash'}>
-                        <img data-id={img._id} src={trash} alt='delete picture icon'></img></div>
+                        <LazyLoadImage data-id={img._id} src={trash} alt='delete picture icon'></LazyLoadImage></div>
                 }
 
 
-                <img className='img' src={img.image} alt="main picture"></img>
+                <LazyLoadImage className='img' src={img.image} alt="main picture" effect="blur"></LazyLoadImage>
 
             </div>
         </div>

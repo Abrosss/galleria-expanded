@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useContext } from 'react';
 import ArtToBeEditedContext from '../context/EditedArt';
 import dots from '../shared/dots.svg'
+import { LazyLoadImage } from "react-lazy-load-image-component";
 function ImageCardArt({ img, index, deletePicture, pictures }) {
 
   const navigate = useNavigate();
@@ -43,7 +44,7 @@ function ImageCardArt({ img, index, deletePicture, pictures }) {
 
         {user &&
           <div data-id={img._id} onClick={() => setSettingsPopup(prev => prev === null ? index : null
-          )} className={hovered === index ? 'settings show' : 'settings'}><img data-id={img._id} src={dots} alt='settings icon'></img>
+          )} className={hovered === index ? 'settings show' : 'settings'}><LazyLoadImage data-id={img._id} src={dots} alt='settings icon'></LazyLoadImage>
             <ul className={settingsPopup === index ? ' settingsPopup show' : 'settingsPopup'}>
               <li onClick={() => setEditPopup(img)}>Edit</li>
               <li onClick={() => deletePicture(img._id)}>Delete</li>
@@ -52,7 +53,7 @@ function ImageCardArt({ img, index, deletePicture, pictures }) {
           </div>
         }
 
-        <img className='img dimmed' src={img.image} alt="thumbnail"   ></img>
+        <LazyLoadImage  className='img dimmed' src={img.image} alt="thumbnail" effect='blur'  ></LazyLoadImage >
         <div className='caption'>
           <h2>{img.title}</h2>
           <p>{img.artist && img.artist.name}</p>

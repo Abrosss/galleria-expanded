@@ -1,6 +1,7 @@
 import React from 'react'
 import axios from '../api/axios';
 import { useState, useEffect } from 'react';
+
 function Thumbnail({thumbs, id, art}) {
     const [pictures, setPictures] = useState([])
 
@@ -27,7 +28,7 @@ function Thumbnail({thumbs, id, art}) {
   return (
     <>
     {thumbs && thumbs.map(pic => (
-        <img src={pic.image}></img>
+        <img src={pic.image} loading="lazy" alt='thumbnail'></img>
     ))}
     </>
   )

@@ -7,7 +7,7 @@ function SlideshowSinglePics({ art }) {
             <section className='slideshow-container-center'>
                 <section className='image-container'>
                     <div className="image-container__image">
-                        <img src={art.img.image} alt="art"   ></img>
+                        <img src={art.img.image} alt="art" loading="lazy"  ></img>
                     </div>
 
                 </section>
