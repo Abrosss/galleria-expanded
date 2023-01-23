@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState } from 'react';
 import ArtPictureForm from './ArtPictureForm';
+import MultipleFileUpload from './MultipleFileUpload';
 function AddImagesForm({isArt,  addPictures, inputList, setInputList}) {
     const [error, setError] = useState(null)
     const [active, setActive] = useState(0)
@@ -65,6 +66,8 @@ function AddImagesForm({isArt,  addPictures, inputList, setInputList}) {
    </>
     :
     <>
+    <MultipleFileUpload/>
+    <span>or</span>
       <ul className="links">
       {inputList && inputList.map((list, i) => {
         const inputProps = {
@@ -78,6 +81,7 @@ function AddImagesForm({isArt,  addPictures, inputList, setInputList}) {
         )
       })}
     </ul>
+    
     {error && <span>{error}</span>}
     <button className='addMoreLinks' onClick={handleAddClick}>Add more images</button>
     <button onClick={addPictures}>Submit</button>
