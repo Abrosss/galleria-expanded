@@ -880,7 +880,9 @@ img {
   }
 
 @media (min-width: 250px) and (max-width: 768px) {
-
+    .button-demo {
+        display: none;
+    }
    .overlay {
     padding: 1rem;
    }

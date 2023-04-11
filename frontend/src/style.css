@@ -39,8 +39,7 @@ header {
   padding: 1rem 0;
   border-bottom: 1px #E5E5E5 solid;
   opacity: 0;
-  -webkit-animation: appear 0.5s forwards ease-in;
-          animation: appear 0.5s forwards ease-in;
+  animation: appear 0.5s forwards ease-in;
   height: 10%;
 }
 header a {
@@ -77,13 +76,26 @@ img {
   cursor: pointer;
 }
 
+.button-demo {
+  border: none;
+  outline: none;
+  height: 40px;
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: "Libre Baskerville", serif;
+  color: #7D7D7D;
+}
+
 .image {
   width: 100%;
   display: block;
   transition: opacity 1.5s;
   padding-bottom: 2.3rem;
-  -webkit-animation: appear 1.5s forwards ease-in;
-          animation: appear 1.5s forwards ease-in;
+  animation: appear 1.5s forwards ease-in;
 }
 .image:hover {
   opacity: 0.8;
@@ -288,8 +300,7 @@ img {
   gap: 25%;
   padding: 0 2rem;
   opacity: 0;
-  -webkit-animation: appear 0.5s forwards ease-in;
-          animation: appear 0.5s forwards ease-in;
+  animation: appear 0.5s forwards ease-in;
   transition: all 5s;
 }
 .slideshow-container p {
@@ -337,8 +348,7 @@ img {
   gap: 25%;
   padding: 0 2rem;
   opacity: 0;
-  -webkit-animation: appear 0.5s forwards ease-in;
-          animation: appear 0.5s forwards ease-in;
+  animation: appear 0.5s forwards ease-in;
   transition: all 5s;
   justify-content: center;
   padding: 0;
@@ -414,8 +424,7 @@ img {
        column-gap: 2.3rem;
   opacity: 0;
   transition: all 1s;
-  -webkit-animation: appear 0.5s forwards ease-in;
-          animation: appear 0.5s forwards ease-in;
+  animation: appear 0.5s forwards ease-in;
 }
 
 .slide-name {
@@ -482,8 +491,7 @@ img {
   opacity: 0;
   z-index: 500;
   padding: 2rem 0;
-  -webkit-animation: appear 0.2s ease-in forwards;
-          animation: appear 0.2s ease-in forwards;
+  animation: appear 0.2s ease-in forwards;
 }
 
 .zoom-image {
@@ -536,7 +544,6 @@ img {
   font-weight: 700;
   -webkit-user-select: none;
      -moz-user-select: none;
-      -ms-user-select: none;
           user-select: none;
 }
 
@@ -665,7 +672,6 @@ img {
   gap: 1rem;
 }
 .flex div {
-  width: -webkit-min-content;
   width: -moz-min-content;
   width: min-content;
 }
@@ -838,18 +844,6 @@ img {
   background-color: rgb(206, 215, 215);
 }
 
-@-webkit-keyframes appear {
-  0% {
-    opacity: 0;
-  }
-  50% {
-    opacity: 0.8;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
 @keyframes appear {
   0% {
     opacity: 0;
@@ -862,6 +856,9 @@ img {
   }
 }
 @media (min-width: 250px) and (max-width: 768px) {
+  .button-demo {
+    display: none;
+  }
   .overlay {
     padding: 1rem;
   }
