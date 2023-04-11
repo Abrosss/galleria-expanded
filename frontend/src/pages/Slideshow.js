@@ -5,7 +5,6 @@ import back from '../shared/icon-back-button.svg'
 import next from '../shared/icon-next-button.svg'
 import play from '../shared/play.svg'
 import pause from '../shared/pause.svg'
-import view from '../shared/icon-view-image.svg'
 import logo from '../shared/logo.svg';
 import { Link } from 'react-router-dom'
 import axios from '../api/axios';
@@ -22,14 +21,12 @@ function Slideshow() {
   const [progress, setProgress] = useState(0)
   const [secondsPerSlide, setSecondsPerSlide] = useState(4)
   const [board, setBoard] = useState([])
-  const [user, setUser] = useState(localStorage.getItem('auth'))
+  const [user] = useState(localStorage.getItem('auth'))
   const secondsInput = useRef()
-console.log(location)
   useEffect(() => {
-  if(pictures) console.log(pictures)
+  if(pictures) 
     if(art.i && pictures) setProgress(Math.round((art.i / (pictures.length - 1)) * 100))
   }, []);
-  console.log(progress)
   useEffect(() => {
     if (board.art) {
       axios.get(`/art/${art.img.board}`).then((response) => {
@@ -119,7 +116,7 @@ console.log(location)
 
       setArt({ img: pictures[art.i + 1], i: art.i + 1 })
       // setProgress(Math.round(((art.i+1) / (pictures.length)) * 100))
-      if (art.i == (pictures.length - 1)) {
+      if (art.i === (pictures.length - 1)) {
         setArt({ img: pictures[0], i: 0 })
         setProgress(0)
       }
@@ -137,7 +134,7 @@ console.log(location)
   function sliderDuration(e, seconds) {
     e.preventDefault()
 
-    if (seconds == 0) setSlideshow(false)
+    if (seconds === 0) setSlideshow(false)
     else setSecondsPerSlide(seconds)
 
     secondsInput.current.blur()
