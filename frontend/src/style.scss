@@ -1,6 +1,6 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&display=swap');
-
+@import "./colors";
 * {
     box-sizing: border-box;
     margin: 0;
@@ -76,8 +76,22 @@ img {
 
 .button {
     cursor: pointer;
-}
 
+}
+.button-demo {
+    border: none;
+    outline: none;
+    height: 40px;
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: 'Libre Baskerville', serif;
+    color: $gray;
+
+}
 .image {
     width: 100%;
     display: block;
