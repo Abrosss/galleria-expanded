@@ -6,6 +6,7 @@ import jwtDecode from 'jwt-decode'
 import GoogleAuthButton from '../components/GoogleAuthButton'
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import Axios from 'axios'
+
 function Header({page}) {
   console.log(page)
   const [boards, setBoards] = useState(JSON.parse(localStorage.getItem('board')))
@@ -74,8 +75,12 @@ console.log(user)
           clientId="730246444349-9hq6kctetsldg9sd6ssiiot1d476oje8.apps.googleusercontent.com"
 
         >
+          <div className='flex'>
+          <button onClick={() => handleGoogle({email:'demo@gmail.com'})} className='button-demo'>Demo</button>
           <GoogleAuthButton onSuccess={onSuccess} onFailure={onFailure} />
+          </div>
         </GoogleOAuthProvider> }  
+        
        {page !== 'boards' && <a onClick={() => viewImage(0)} href='/slideshow'>START SLIDESHOW</a>} 
     </header>
   )
